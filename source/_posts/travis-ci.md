@@ -1,11 +1,9 @@
 ---
-title: Travis CI 自动部署blog #文章页面上的显示名称，一般是中文
-date: 2020-3-27 10:30:16 #文章生成时间，一般不改，当然也可以任意修改
-categories: 默认分类 #分类
-tags: [Travis CI] #文章标签，可空，多标签请用格式，注意:后面有个空格
-description: 记录测试自动部署中遇到的几个问题
+title: Travis CI 自动部署blog 
 ---
 ## 记录几个问题
+
+
 
 ### Hexo的帮助内容比较陈旧
 
