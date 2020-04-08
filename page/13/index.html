@@ -159,6 +159,84 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/22/e5-85-a8-e6-a0-88-e5-b7-a5-e7-a8-8b-e5-b8-88-e5-85-bb-e6-88-90-e8-ae-b0-e5-bd-959/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Winnux">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Winnux's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/03/22/e5-85-a8-e6-a0-88-e5-b7-a5-e7-a8-8b-e5-b8-88-e5-85-bb-e6-88-90-e8-ae-b0-e5-bd-959/" class="post-title-link" itemprop="url">全栈工程师养成记录9</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-03-22 14:04:09" itemprop="dateCreated datePublished" datetime="2017-03-22T14:04:09+00:00">2017-03-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-04-08 05:53:31" itemprop="dateModified" datetime="2020-04-08T05:53:31+00:00">2020-04-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Bob/" itemprop="url" rel="index"><span itemprop="name">Bob</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Bob/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>最近的几天忙于陪护Fiona，一直也没有时间、没心情去研究数据采集端的问题。 初步想法是和现地采集器通信方式交互数据，可以选择的模式有共享内存、tcp/ip报文等通信方式。采集到的数据定期更新到server端，在这个过程中一度想用C/C++直接做个小程序操作mongodb得了，最后看了看mongodb那个繁琐的（实际还可以，可能是最近对C++有点排斥，呵呵）驱动库，还得连接boost什么的，算了，不用了。 那剩下的选择就不多了，想过用node，可又觉得不太合适。 今天上午仔细研究了一下使用go的可行性，发现用go做这个小终端挺合适，以前学习了好几次go语言，都没啥实用项目，做的小程序都是例子一类的。这回就来个实际操作吧。 定下来go，发现不用自己用http库自己解析RESTFUL api了，有一个go的库go-resty直接已经做好了，这个方便多了，直接用就可以了。 类似的Get，Put方法都很简单 <em>resp, err := resty.R().Get(“<a href="http://localhost:3000/ghs/150001000001&quot;" target="_blank" rel="noopener">http://localhost:3000/ghs/150001000001&quot;</a>)</em> <em>fmt.Printf(“\nError: %v”, err)</em> <em>fmt.Printf(“\nResponse Status Code: %v”, resp.StatusCode())</em> <em>fmt.Printf(“\nResponse Status: %v”, resp.Status())</em> <em>fmt.Printf(“\nResponse Time: %v”, resp.Time())</em> <em>fmt.Printf(“\nResponse Recevied At: %v”, resp.ReceivedAt())</em> <em>var gh GreenHouse</em> <em>err = json.Unmarshal(resp.Body(), &amp;gh)</em> <em>if err != nil {</em> <em>panic(err)</em> <em>}</em> <em>fmt.Println(“”)</em> <em>fmt.Println(“id:”, gh.ID)</em> <em>fmt.Println(“ghName:”, gh.GhName)</em> <em>fmt.Println(“UID:”, gh.UID)</em> <em>put_resp, err1 := resty.R().</em> <em>SetBody(GreenHouse{Hum1: 11.23, Hum2: 12}).</em> <em>Put(“<a href="http://localhost:3000/ghs/150001000001&quot;" target="_blank" rel="noopener">http://localhost:3000/ghs/150001000001&quot;</a>)</em> <em>fmt.Printf(“\nError: %v”, err1)</em> <em>fmt.Printf(“\nResponse Status Code: %v”, put_resp.StatusCode())</em> 这么短短几行代码基本搞定了。 另外这个<a href="https://mholt.github.io/json-to-go/" target="_blank" rel="noopener">https://mholt.github.io/json-to-go/</a>网站很好，json到go结构体，非常方便，省了很多事。 基本上剩下的就是收集数据，维护内存数据，然后定期更新server端数据，同时还要有个定时读取server端命令的coroutine，收到命令后发给采集器。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/17/e9-99-aafiona-e5-81-9act-e6-a3-80-e6-9f-a5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -190,7 +268,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-31 07:02:39" itemprop="dateModified" datetime="2020-03-31T07:02:39+00:00">2020-03-31</time>
+                <time title="Modified: 2020-04-08 05:53:31" itemprop="dateModified" datetime="2020-04-08T05:53:31+00:00">2020-04-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -268,7 +346,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-31 07:02:39" itemprop="dateModified" datetime="2020-03-31T07:02:39+00:00">2020-03-31</time>
+                <time title="Modified: 2020-04-08 05:53:31" itemprop="dateModified" datetime="2020-04-08T05:53:31+00:00">2020-04-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -342,7 +420,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-31 07:02:39" itemprop="dateModified" datetime="2020-03-31T07:02:39+00:00">2020-03-31</time>
+                <time title="Modified: 2020-04-08 05:53:31" itemprop="dateModified" datetime="2020-04-08T05:53:31+00:00">2020-04-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -456,7 +534,7 @@ protected void deliverResponse(T response) {
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-31 07:02:39" itemprop="dateModified" datetime="2020-03-31T07:02:39+00:00">2020-03-31</time>
+                <time title="Modified: 2020-04-08 05:53:31" itemprop="dateModified" datetime="2020-04-08T05:53:31+00:00">2020-04-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -530,7 +608,7 @@ protected void deliverResponse(T response) {
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-31 07:02:39" itemprop="dateModified" datetime="2020-03-31T07:02:39+00:00">2020-03-31</time>
+                <time title="Modified: 2020-04-08 05:53:31" itemprop="dateModified" datetime="2020-04-08T05:53:31+00:00">2020-04-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -608,7 +686,7 @@ protected void deliverResponse(T response) {
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-31 07:02:39" itemprop="dateModified" datetime="2020-03-31T07:02:39+00:00">2020-03-31</time>
+                <time title="Modified: 2020-04-08 05:53:31" itemprop="dateModified" datetime="2020-04-08T05:53:31+00:00">2020-04-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -686,7 +764,7 @@ protected void deliverResponse(T response) {
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-31 07:02:39" itemprop="dateModified" datetime="2020-03-31T07:02:39+00:00">2020-03-31</time>
+                <time title="Modified: 2020-04-08 05:53:31" itemprop="dateModified" datetime="2020-04-08T05:53:31+00:00">2020-04-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -764,7 +842,7 @@ protected void deliverResponse(T response) {
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-31 07:02:39" itemprop="dateModified" datetime="2020-03-31T07:02:39+00:00">2020-03-31</time>
+                <time title="Modified: 2020-04-08 05:53:31" itemprop="dateModified" datetime="2020-04-08T05:53:31+00:00">2020-04-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -842,7 +920,7 @@ protected void deliverResponse(T response) {
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-31 07:02:39" itemprop="dateModified" datetime="2020-03-31T07:02:39+00:00">2020-03-31</time>
+                <time title="Modified: 2020-04-08 05:53:31" itemprop="dateModified" datetime="2020-04-08T05:53:31+00:00">2020-04-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -875,80 +953,6 @@ protected void deliverResponse(T response) {
 <p>这个里面饶了点弯路，就是我那个server返回的json是个array，开始按jsonobject解析一直报错。<br>后来改成jsonarray就好了。</p>
 <p><img src="http://imfiona.cn/wp/wp-content/uploads/2017/02/volley-1024x555.png" alt=""></p>
 <p>初步完成测试了，基本可以用了。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/27/e5-85-a8-e6-a0-88-e5-b7-a5-e7-a8-8b-e5-b8-88-e5-85-bb-e6-88-90-e8-ae-b0-e5-bd-952/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Winnux">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Winnux's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/02/27/e5-85-a8-e6-a0-88-e5-b7-a5-e7-a8-8b-e5-b8-88-e5-85-bb-e6-88-90-e8-ae-b0-e5-bd-952/" class="post-title-link" itemprop="url">全栈工程师养成记录2</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2017-02-27 13:57:26" itemprop="dateCreated datePublished" datetime="2017-02-27T13:57:26+00:00">2017-02-27</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-31 07:02:39" itemprop="dateModified" datetime="2020-03-31T07:02:39+00:00">2020-03-31</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>作了一番功课，初步定下来大架构方案为后端RESTFUL web service 前端原生android client或者phonegap。 后端框架nodejs + express + mongodb . 这里面express实际也可以有个替代可选方案就是restify，这个是专门瞄准restuful api来的，但感觉还是不如express成熟，暂不考虑。 mongodb这个也可用mysql，postgresql等等，但不如mongodb合适，暂不考虑。先用这个方案执行下去。 另外也得考虑数据采集端数据上传接口，当然支持RESTFUL 标准更好，不行就得做个client放在采集端负责这些内容。</p>
 
       
     </div>
@@ -1034,7 +1038,7 @@ protected void deliverResponse(T response) {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">174</span>
+          <span class="site-state-item-count">175</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

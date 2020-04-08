@@ -159,6 +159,80 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/12/vue-js-e7-9b-b4-e6-8e-a5-e6-93-8d-e4-bd-9csvg-e5-af-b9-e8-b1-a1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Winnux">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Winnux's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/04/12/vue-js-e7-9b-b4-e6-8e-a5-e6-93-8d-e4-bd-9csvg-e5-af-b9-e8-b1-a1/" class="post-title-link" itemprop="url">vue.js直接操作svg对象</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-04-12 16:31:22" itemprop="dateCreated datePublished" datetime="2017-04-12T16:31:22+00:00">2017-04-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-04-08 05:53:31" itemprop="dateModified" datetime="2020-04-08T05:53:31+00:00">2020-04-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Bob/" itemprop="url" rel="index"><span itemprop="name">Bob</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>下午看到以前的singalr的svg实时刷新，好久没弄，只是个原型。 想起来是否能用vue直接操作svg对象呢。 简单实验了一下，如果svg是直接写在html里面的还是可以的，就当成dom元素一行可以各种vm操控。 但是用object标签导入的svg文件，不可以，这个结果也在预料之中。 引用一段   “通过object、embed或者iframe标签将SVG文件引入到HTML页面上呈现出来。对于该种情况， 这些标签实际上会把通过<code>data</code>或<code>src</code>属性指定的内容相对独立的引入到页面上来，也就是其中的内容会有完全属于自己的<code>document</code>对象。所以使用原来的<code>document</code>对象就无法取得通过上述标签引入进来的SVG文档中元素，更不用说去修改上边的属性了。” 上述原因估计直接本页面去弄，肯定是拿不到关联的。 好在当使用JavaScript获取到这些元素对象的时候，它们都一个方法可以获取所引用的SVG文档的document对象，那就是<a href="http://msdn.microsoft.com/en-us/library/ie/hh772865(v=vs.85).aspx" target="_blank" rel="noopener"><code>getSVGDocument()</code></a>。 如果不用vue这类的，直接写js脚本应该也能搞object引进来的svg对象。这个在做signalR时候已经验证了。 如果想用vue直接操作这些引用对象的内部，估计不行，实际实现起来我觉得也不是没有可能，vue目前的el 取得都是dom树，加一个关键字去取svg对象树就可以。可能不是这么简单，vue的实现没有太多概念。   记录一下，看看以后有没有可能，也不失为一种方式。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/11/e8-bf-9e-e7-bb-ad-e5-ad-a6-e4-b9-a0ps-e4-b8-a4-e5-a4-a9/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -190,7 +264,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-31 07:02:39" itemprop="dateModified" datetime="2020-03-31T07:02:39+00:00">2020-03-31</time>
+                <time title="Modified: 2020-04-08 05:53:31" itemprop="dateModified" datetime="2020-04-08T05:53:31+00:00">2020-04-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -264,7 +338,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-31 07:02:39" itemprop="dateModified" datetime="2020-03-31T07:02:39+00:00">2020-03-31</time>
+                <time title="Modified: 2020-04-08 05:53:31" itemprop="dateModified" datetime="2020-04-08T05:53:31+00:00">2020-04-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -342,7 +416,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-31 07:02:39" itemprop="dateModified" datetime="2020-03-31T07:02:39+00:00">2020-03-31</time>
+                <time title="Modified: 2020-04-08 05:53:31" itemprop="dateModified" datetime="2020-04-08T05:53:31+00:00">2020-04-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -418,7 +492,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-31 07:02:39" itemprop="dateModified" datetime="2020-03-31T07:02:39+00:00">2020-03-31</time>
+                <time title="Modified: 2020-04-08 05:53:31" itemprop="dateModified" datetime="2020-04-08T05:53:31+00:00">2020-04-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -492,7 +566,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-31 07:02:39" itemprop="dateModified" datetime="2020-03-31T07:02:39+00:00">2020-03-31</time>
+                <time title="Modified: 2020-04-08 05:53:31" itemprop="dateModified" datetime="2020-04-08T05:53:31+00:00">2020-04-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -570,7 +644,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-31 07:02:39" itemprop="dateModified" datetime="2020-03-31T07:02:39+00:00">2020-03-31</time>
+                <time title="Modified: 2020-04-08 05:53:31" itemprop="dateModified" datetime="2020-04-08T05:53:31+00:00">2020-04-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -648,7 +722,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-31 07:02:39" itemprop="dateModified" datetime="2020-03-31T07:02:39+00:00">2020-03-31</time>
+                <time title="Modified: 2020-04-08 05:53:31" itemprop="dateModified" datetime="2020-04-08T05:53:31+00:00">2020-04-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -722,7 +796,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-31 07:02:39" itemprop="dateModified" datetime="2020-03-31T07:02:39+00:00">2020-03-31</time>
+                <time title="Modified: 2020-04-08 05:53:31" itemprop="dateModified" datetime="2020-04-08T05:53:31+00:00">2020-04-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -800,7 +874,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-31 07:02:39" itemprop="dateModified" datetime="2020-03-31T07:02:39+00:00">2020-03-31</time>
+                <time title="Modified: 2020-04-08 05:53:31" itemprop="dateModified" datetime="2020-04-08T05:53:31+00:00">2020-04-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -828,84 +902,6 @@
 
       
           <p>不得不说，自从决定正式在项目中应用Golang，我就越来越喜欢这个语言了。简洁、兼具动态语言特性，同时又不失效率。丰富的功能包，方便的引用方式，这些都是原来用其他静态语言不可比拟的，同时又很方便编译，跨平台运行，二进制效率很高。 看了一个github上的go的modbus包，对比c的libmodbus库，代码量少很多不说，实现模式也简洁高效，对于golang的这些语言特性应用的异常方便，同时golang特有的天生coroutine的支持，做一些并行工作太方便了。 但是，感觉作为一个新语言，golang的学习门槛比较低，但完全领会其设计精神，编写出具备go特性的程序，会有些难度，尤其对于学习使用了其他c、java等OO的语言方式养成的思维定式短时间可能不太好改变。 对于以后项目中，能用go的地方应该尽量使用，能很大程度加快开发进度，对于一些需要ui的程序我觉得可以用qt就可以，go用作网络处理、并行处理、后台计算等内容，nodejs在做网络服务时也是一个选择，其他语言能想到的估计还有erlang，但这个简单看过一次有关的书籍后，一直没使用，现在感觉又忘的差不多了。关于它的内容有时间还得再看看。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/22/e5-85-a8-e6-a0-88-e5-b7-a5-e7-a8-8b-e5-b8-88-e5-85-bb-e6-88-90-e8-ae-b0-e5-bd-959/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Winnux">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Winnux's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/03/22/e5-85-a8-e6-a0-88-e5-b7-a5-e7-a8-8b-e5-b8-88-e5-85-bb-e6-88-90-e8-ae-b0-e5-bd-959/" class="post-title-link" itemprop="url">全栈工程师养成记录9</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2017-03-22 14:04:09" itemprop="dateCreated datePublished" datetime="2017-03-22T14:04:09+00:00">2017-03-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-31 07:02:39" itemprop="dateModified" datetime="2020-03-31T07:02:39+00:00">2020-03-31</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Bob/" itemprop="url" rel="index"><span itemprop="name">Bob</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Bob/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>最近的几天忙于陪护Fiona，一直也没有时间、没心情去研究数据采集端的问题。 初步想法是和现地采集器通信方式交互数据，可以选择的模式有共享内存、tcp/ip报文等通信方式。采集到的数据定期更新到server端，在这个过程中一度想用C/C++直接做个小程序操作mongodb得了，最后看了看mongodb那个繁琐的（实际还可以，可能是最近对C++有点排斥，呵呵）驱动库，还得连接boost什么的，算了，不用了。 那剩下的选择就不多了，想过用node，可又觉得不太合适。 今天上午仔细研究了一下使用go的可行性，发现用go做这个小终端挺合适，以前学习了好几次go语言，都没啥实用项目，做的小程序都是例子一类的。这回就来个实际操作吧。 定下来go，发现不用自己用http库自己解析RESTFUL api了，有一个go的库go-resty直接已经做好了，这个方便多了，直接用就可以了。 类似的Get，Put方法都很简单 <em>resp, err := resty.R().Get(“<a href="http://localhost:3000/ghs/150001000001&quot;" target="_blank" rel="noopener">http://localhost:3000/ghs/150001000001&quot;</a>)</em> <em>fmt.Printf(“\nError: %v”, err)</em> <em>fmt.Printf(“\nResponse Status Code: %v”, resp.StatusCode())</em> <em>fmt.Printf(“\nResponse Status: %v”, resp.Status())</em> <em>fmt.Printf(“\nResponse Time: %v”, resp.Time())</em> <em>fmt.Printf(“\nResponse Recevied At: %v”, resp.ReceivedAt())</em> <em>var gh GreenHouse</em> <em>err = json.Unmarshal(resp.Body(), &amp;gh)</em> <em>if err != nil {</em> <em>panic(err)</em> <em>}</em> <em>fmt.Println(“”)</em> <em>fmt.Println(“id:”, gh.ID)</em> <em>fmt.Println(“ghName:”, gh.GhName)</em> <em>fmt.Println(“UID:”, gh.UID)</em> <em>put_resp, err1 := resty.R().</em> <em>SetBody(GreenHouse{Hum1: 11.23, Hum2: 12}).</em> <em>Put(“<a href="http://localhost:3000/ghs/150001000001&quot;" target="_blank" rel="noopener">http://localhost:3000/ghs/150001000001&quot;</a>)</em> <em>fmt.Printf(“\nError: %v”, err1)</em> <em>fmt.Printf(“\nResponse Status Code: %v”, put_resp.StatusCode())</em> 这么短短几行代码基本搞定了。 另外这个<a href="https://mholt.github.io/json-to-go/" target="_blank" rel="noopener">https://mholt.github.io/json-to-go/</a>网站很好，json到go结构体，非常方便，省了很多事。 基本上剩下的就是收集数据，维护内存数据，然后定期更新server端数据，同时还要有个定时读取server端命令的coroutine，收到命令后发给采集器。</p>
 
       
     </div>
@@ -991,7 +987,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">174</span>
+          <span class="site-state-item-count">175</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
