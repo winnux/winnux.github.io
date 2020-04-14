@@ -159,6 +159,84 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/26/licode-e7-bc-96-e8-af-91-e6-91-98-e8-ae-b0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Winnux">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Winnux's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/06/26/licode-e7-bc-96-e8-af-91-e6-91-98-e8-ae-b0/" class="post-title-link" itemprop="url">licode编译摘记</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-06-26 13:29:38" itemprop="dateCreated datePublished" datetime="2017-06-26T13:29:38+00:00">2017-06-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-04-14 06:58:32" itemprop="dateModified" datetime="2020-04-14T06:58:32+00:00">2020-04-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Bob/" itemprop="url" rel="index"><span itemprop="name">Bob</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Bob/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>这几天研究视频实时传输方案，rtmp这类的基于tcp的延迟有些大。 简单测试局域网的rtmp（用的simple-rtmp-server推流）延迟就不小，可能是我实验方式问题，感觉不应该这么大。 最后看还是要回到原来的udp传输上，除了私有协议外，webrtc算个不错的选择。 google的apprtc搭建起来太麻烦了，而且最近用的好好的green vpn也要挂了（7月1日停服了）。新用的ss都不是很快，后来翻到这个licode开源视频会议类项目，看github很多star，可以试试webrtc的延迟性能。 谁知道安装编译过程好多地方它官网都没写啊，执行完它那个ubuntudeps脚本还有好多库需要安装，编译的时候一开始好多库找不到，都是avutils avcodec这类的，还有个log4cxx。 库全了，编译选项还得改改，缺省的编译是把过时的数据定义当成错误报告，编译不通过，在cmakefile里手工添加一个忽略选项 -Wno-decrated-delcarations 才能继续编译。 然后是第二个坑，没搞懂是不是版本不兼容还是啥其他原因，libavtuils-dev包里的common.h定义报错，google一下参考<a href="http://blog.csdn.net/friendan/article/details/46576699" target="_blank" rel="noopener">http://blog.csdn.net/friendan/article/details/46576699</a>这里所说添加定义 #ifdef __cplusplus #define __STDC_CONSTANT_MACROS #ifdef _STDINT_H #undef _STDINT_H #endif # include “stdint.h” #endif #ifndef INT64_C #define INT64_C(c) (c ## LL) #define UINT64_C(c) (c ## ULL) #endif 才编译通过</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/15/e7-bb-88-e4-ba-8e-e6-98-a8-e6-99-9a-e4-b8-80-e4-b8-aa-e7-ab-99-e7-82-b9-e9-95-9c-e5-83-8f/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -190,7 +268,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-08 05:53:31" itemprop="dateModified" datetime="2020-04-08T05:53:31+00:00">2020-04-08</time>
+                <time title="Modified: 2020-04-14 06:58:32" itemprop="dateModified" datetime="2020-04-14T06:58:32+00:00">2020-04-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -264,7 +342,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-08 05:53:31" itemprop="dateModified" datetime="2020-04-08T05:53:31+00:00">2020-04-08</time>
+                <time title="Modified: 2020-04-14 06:58:32" itemprop="dateModified" datetime="2020-04-14T06:58:32+00:00">2020-04-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -342,7 +420,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-08 05:53:31" itemprop="dateModified" datetime="2020-04-08T05:53:31+00:00">2020-04-08</time>
+                <time title="Modified: 2020-04-14 06:58:32" itemprop="dateModified" datetime="2020-04-14T06:58:32+00:00">2020-04-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -420,7 +498,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-08 05:53:31" itemprop="dateModified" datetime="2020-04-08T05:53:31+00:00">2020-04-08</time>
+                <time title="Modified: 2020-04-14 06:58:32" itemprop="dateModified" datetime="2020-04-14T06:58:32+00:00">2020-04-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -494,7 +572,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-08 05:53:31" itemprop="dateModified" datetime="2020-04-08T05:53:31+00:00">2020-04-08</time>
+                <time title="Modified: 2020-04-14 06:58:32" itemprop="dateModified" datetime="2020-04-14T06:58:32+00:00">2020-04-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -568,7 +646,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-08 05:53:31" itemprop="dateModified" datetime="2020-04-08T05:53:31+00:00">2020-04-08</time>
+                <time title="Modified: 2020-04-14 06:58:32" itemprop="dateModified" datetime="2020-04-14T06:58:32+00:00">2020-04-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -642,7 +720,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-08 05:53:31" itemprop="dateModified" datetime="2020-04-08T05:53:31+00:00">2020-04-08</time>
+                <time title="Modified: 2020-04-14 06:58:32" itemprop="dateModified" datetime="2020-04-14T06:58:32+00:00">2020-04-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -716,7 +794,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-08 05:53:31" itemprop="dateModified" datetime="2020-04-08T05:53:31+00:00">2020-04-08</time>
+                <time title="Modified: 2020-04-14 06:58:32" itemprop="dateModified" datetime="2020-04-14T06:58:32+00:00">2020-04-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -790,7 +868,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-08 05:53:31" itemprop="dateModified" datetime="2020-04-08T05:53:31+00:00">2020-04-08</time>
+                <time title="Modified: 2020-04-14 06:58:32" itemprop="dateModified" datetime="2020-04-14T06:58:32+00:00">2020-04-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -814,80 +892,6 @@
 
       
           <p>昨晚疼的厉害，翻来覆去，直到后半夜才迷迷糊糊睡着。 这个牙啊，拖来拖去，看来还是躲不了一钻。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/12/e5-85-8d-e5-a4-b1-e5-bf-97/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Winnux">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Winnux's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/05/12/e5-85-8d-e5-a4-b1-e5-bf-97/" class="post-title-link" itemprop="url">免失志</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2017-05-12 11:30:53" itemprop="dateCreated datePublished" datetime="2017-05-12T11:30:53+00:00">2017-05-12</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-08 05:53:31" itemprop="dateModified" datetime="2020-04-08T05:53:31+00:00">2020-04-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Bob/" itemprop="url" rel="index"><span itemprop="name">Bob</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>最近网易云音乐一直听闽南语歌，感觉有人总结的很好 “闽南语的很多老歌都描写世态炎凉、人情世故、人生的失意消沉、爱人或者朋友的背叛、于是杯中浮沉，但最后 总能总结为用一种简单的积极向上的心态来面对排解。 ” 这首陈小云的&lt;免失志&gt; 还是《英雄本色》里小马哥枫林阁酒家走廊藏枪的BGM，听着很舒服 [audio mp3=”<a href="http://imfiona.cn/wp/wp-content/uploads/2017/05/陈小云-免失志.mp3&quot;\]\[/audio\]" target="_blank" rel="noopener">http://imfiona.cn/wp/wp-content/uploads/2017/05/陈小云-免失志.mp3&quot;\]\[/audio\]</a></p>
 
       
     </div>
@@ -973,7 +977,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">175</span>
+          <span class="site-state-item-count">176</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

@@ -159,6 +159,80 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/06/e6-9c-80-e8-bf-91-e7-9a-84-e4-b8-80-e4-ba-9b-e8-ae-b0-e5-bd-95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Winnux">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Winnux's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/02/06/e6-9c-80-e8-bf-91-e7-9a-84-e4-b8-80-e4-ba-9b-e8-ae-b0-e5-bd-95/" class="post-title-link" itemprop="url">最近的一些记录</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-02-06 10:39:18" itemprop="dateCreated datePublished" datetime="2017-02-06T10:39:18+00:00">2017-02-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-04-14 06:58:32" itemprop="dateModified" datetime="2020-04-14T06:58:32+00:00">2020-04-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Bob/" itemprop="url" rel="index"><span itemprop="name">Bob</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>1. 最近把61850那些程序移植到linux下了，暂时把涉及到windows专用sdk等等都改成了linux下，有一些没有对应模式的（如waitformultipleobject）就换了一些使用方式。 由于pthread替换win thread的关系，又重温了以便the linux programming interface这本书，发现每次都有收获。这回把windows的event和linux的condition对比明白了，弄个类似event的类便于移植好多event有关代码。 内存映射文件部分没问题，但linux下我想也用不到了，win下主要是服务和子进程间通信用了，linux下我看supervisord那个程序很号，没有具体测试，实在不行就先各个进程单独运行，再好点自己弄个daemon啥的监控一下。怎么的也比win下简单，我考虑。 另外就是原来在windows下用的那套基于libevent的hiredis异步事件机制没有用，我看把redis的subscribe命令在单独线程里转之后，同步一直读这个方式也可行，先设置读超时，然后while里面不断调用处理就可以。暂时未采用任何异步模式hiredis操作，慢慢看看在用ae什么的。 现在还有一个就是直接操作hiredis的context对象，没有pool什么的，每次失败都重连一下，比较粗糙。下一步考虑怎么好弄一个连接池管理一下。 2. 另外一个，一直考虑通信机移植后的一些基础结构和基础服务类问题。个人倾向于采用多进程+redis缓存模式处理，但这样基本算是重来，不算移植了，工作量估计比较大。第一步考虑是否硬移植，原来win下程序结构不变，还是主程序+n个驱动程序，采用dlopen模式装载各个部分，然后还是数据路由模式。这样也要考虑串口+网络的底层驱动库问题。 原来一段时间一直在简单的包装linux serial和socket作为两个类使用，还是使用现成的类库（asio）。各有利弊，考虑过好几次，没有定下来。 今天好好分析了一下使用asio的方式，发现除了依赖一些boost库外，看上去很好，串口和网络库都统一了。由于原win下好多用法都是同步方式使用串口网口，分析一下asio的异步模式提供同步接口的情况，发现也可以。 具体看到了一些参考: a.<a href="http://mayacong.blog.51cto.com/3724695/1156818" target="_blank" rel="noopener">国内blog上的一个例子</a> b.<a href="http://www.mira-project.org/MIRA-doc/SyncTimedRead_8h_source.html" target="_blank" rel="noopener">MIRA库用asio的实现</a> c.<a href="http://stackoverflow.com/questions/10858719/cancel-async-read-due-to-timeout" target="_blank" rel="noopener">stackoverflow上的一个讨论，尤其是C++11部分</a> 基本上这些满足要求了。而且网络情况也可同样使用，很好。 3. 上面考虑asio串口时候想到linux下串口调试，google一下虚拟串口发现linux这方面很好，比win的vpsd那些都方便，找了一下，参考<a href="http://stackoverflow.com/questions/52187/virtual-serial-port-for-linux" target="_blank" rel="noopener">stackoverflow下这个文章</a>发现用socat这个命令很好用，直接连两个伪终端就行，如： socat PTY,link=/tmp/ttyS0 PTY,link=/tmp/ttyS1 这样直接在minicom -D /tmp/ttyS0打开就能使用了，而且那俩是一个pair，很方便。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/06/fiona-e6-80-a5-e6-80-a7-e6-89-81-e6-a1-83-e4-bd-93-e7-82-8e/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -190,7 +264,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-08 05:53:31" itemprop="dateModified" datetime="2020-04-08T05:53:31+00:00">2020-04-08</time>
+                <time title="Modified: 2020-04-14 06:58:32" itemprop="dateModified" datetime="2020-04-14T06:58:32+00:00">2020-04-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -264,7 +338,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-08 05:53:31" itemprop="dateModified" datetime="2020-04-08T05:53:31+00:00">2020-04-08</time>
+                <time title="Modified: 2020-04-14 06:58:32" itemprop="dateModified" datetime="2020-04-14T06:58:32+00:00">2020-04-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -338,7 +412,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-08 05:53:31" itemprop="dateModified" datetime="2020-04-08T05:53:31+00:00">2020-04-08</time>
+                <time title="Modified: 2020-04-14 06:58:32" itemprop="dateModified" datetime="2020-04-14T06:58:32+00:00">2020-04-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -420,7 +494,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-08 05:53:31" itemprop="dateModified" datetime="2020-04-08T05:53:31+00:00">2020-04-08</time>
+                <time title="Modified: 2020-04-14 06:58:32" itemprop="dateModified" datetime="2020-04-14T06:58:32+00:00">2020-04-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -494,7 +568,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-08 05:53:31" itemprop="dateModified" datetime="2020-04-08T05:53:31+00:00">2020-04-08</time>
+                <time title="Modified: 2020-04-14 06:58:32" itemprop="dateModified" datetime="2020-04-14T06:58:32+00:00">2020-04-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -568,7 +642,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-08 05:53:31" itemprop="dateModified" datetime="2020-04-08T05:53:31+00:00">2020-04-08</time>
+                <time title="Modified: 2020-04-14 06:58:32" itemprop="dateModified" datetime="2020-04-14T06:58:32+00:00">2020-04-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -646,7 +720,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-08 05:53:31" itemprop="dateModified" datetime="2020-04-08T05:53:31+00:00">2020-04-08</time>
+                <time title="Modified: 2020-04-14 06:58:32" itemprop="dateModified" datetime="2020-04-14T06:58:32+00:00">2020-04-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -720,7 +794,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-08 05:53:31" itemprop="dateModified" datetime="2020-04-08T05:53:31+00:00">2020-04-08</time>
+                <time title="Modified: 2020-04-14 06:58:32" itemprop="dateModified" datetime="2020-04-14T06:58:32+00:00">2020-04-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -801,7 +875,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-08 05:53:31" itemprop="dateModified" datetime="2020-04-08T05:53:31+00:00">2020-04-08</time>
+                <time title="Modified: 2020-04-14 06:58:32" itemprop="dateModified" datetime="2020-04-14T06:58:32+00:00">2020-04-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -825,80 +899,6 @@
 
       
           <p>去年在文件服务器上架设过一个基于docker的owncloud，用了一段时间，后来出了一个莫名其妙问题，那个docker image启动出错了，同步了好多文件。哎，没时间弄它。 昨天想着代码服务器负载不多，决定在那上面再弄一个owncloud，这东西太方便了，可以把常用的东西都放在上面，mobile，desktop等用都方便，主要是我花了6个大洋在app store上还买了它一个ios客户端，不能浪费。 鉴于我以前对bitnami的良好印象，直接找bitnami打包的owncloud，直接给我一个惊喜，运行不了。原来是服务器上弄得bitnami的gitlab是基于LAPP的，owncloud需要的bitnami基础架构是LAMP的，后来自己装了个mariadb，用bitnami owncloud lamp module插件安装也不行。 自己从头来吧，centos下添加owncoud源，安装apache、php、mariadb，一套东西弄下来还算顺利，最后给owncloud建数据库，添db 用户填了个本地权限，我恰恰没在本地浏览器打开owncloud初始化页面，结果就是提示mariadb数据库建立表失败。好吧，卸载重来，owncloud在/var/html/下的文件实际是owncloud-file包里，我折腾半天owncloud都没起作用，后来发现自己真是笨死了。 终于再一次乌龙后架设完毕了，呵呵，同步了work doc等一些常用目录，晚上回家还把家里的文件简单上传了同步一些。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/06/fiona-e7-9a-84-e9-97-aa-e7-94-b5-e6-88-98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Winnux">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Winnux's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/02/06/fiona-e7-9a-84-e9-97-aa-e7-94-b5-e6-88-98/" class="post-title-link" itemprop="url">Fiona的闪电战</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2017-02-06 10:32:58" itemprop="dateCreated datePublished" datetime="2017-02-06T10:32:58+00:00">2017-02-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-08 05:53:31" itemprop="dateModified" datetime="2020-04-08T05:53:31+00:00">2020-04-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Bob/" itemprop="url" rel="index"><span itemprop="name">Bob</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>前天凌晨，fiona突然发烧了，38.2. 半夜开始口服一些浦地蓝、金莲清温中药，早上36.9. 昨天一天基本上37多左右，又继续吃了点中药。 昨晚到今天36.5了，头一次38以上就依靠小中药自己控制住体温了。 24小时内给我来个闪电战，昨天一天困死我了，晚上躺床上就睡着了。</p>
 
       
     </div>
@@ -984,7 +984,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">175</span>
+          <span class="site-state-item-count">176</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
