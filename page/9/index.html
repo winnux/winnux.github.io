@@ -159,6 +159,84 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/29/supervisor-xml-rpc-e7-ae-80-e8-ae-b0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Winnux">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Winnux's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/09/29/supervisor-xml-rpc-e7-ae-80-e8-ae-b0/" class="post-title-link" itemprop="url">Supervisor xml-rpc简记</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-09-29 12:37:40" itemprop="dateCreated datePublished" datetime="2017-09-29T12:37:40+00:00">2017-09-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-04-14 07:24:19" itemprop="dateModified" datetime="2020-04-14T07:24:19+00:00">2020-04-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Bob/" itemprop="url" rel="index"><span itemprop="name">Bob</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Bob/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>通讯机的进程管理用了supervisor，其自身带http的服务，可以通过web浏览到管理的进程情况。 但浏览器中控制进程的过程中总容易出现浏览器假死状况，没搞清是服务端还是浏览器的问题，chrome稍好，但也出现过。 本身的C/S配置平台也要对目标机进行管理，研究一下其提供的xml-rpc接口，发现基本够用了。 在GitHub上找到一个qt的xml-rpc库，基本思路就是QNetworkManager进行网络的http通讯，然后整理发送/接收的xml参数为Qt的QVariant类型。 用这个libmaia直接连接目标机的supervisor xml-rpc服务非常方便，直接调用它的一些方法可以直接管理所有的RPC服务。 其中进程的管理方法很多，用起来也很方便。 好工具+好平台 = 快速迭代的好产品，Qt的，Go语言的这些良好的社区环境大大的加快了项目的推进。 最后，最近越来越不愿意动手coding了，总有个思路就不愿意亲手去实现，不是好苗头。 还得坚持写一些，虽然不多，保持“手感”，哈哈。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/13/e6-85-a2-e6-85-a2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -190,7 +268,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-14 07:13:21" itemprop="dateModified" datetime="2020-04-14T07:13:21+00:00">2020-04-14</time>
+                <time title="Modified: 2020-04-14 07:24:19" itemprop="dateModified" datetime="2020-04-14T07:24:19+00:00">2020-04-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -268,7 +346,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-14 07:13:21" itemprop="dateModified" datetime="2020-04-14T07:13:21+00:00">2020-04-14</time>
+                <time title="Modified: 2020-04-14 07:24:19" itemprop="dateModified" datetime="2020-04-14T07:24:19+00:00">2020-04-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -342,7 +420,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-14 07:13:21" itemprop="dateModified" datetime="2020-04-14T07:13:21+00:00">2020-04-14</time>
+                <time title="Modified: 2020-04-14 07:24:19" itemprop="dateModified" datetime="2020-04-14T07:24:19+00:00">2020-04-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -416,7 +494,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-14 07:13:21" itemprop="dateModified" datetime="2020-04-14T07:13:21+00:00">2020-04-14</time>
+                <time title="Modified: 2020-04-14 07:24:19" itemprop="dateModified" datetime="2020-04-14T07:24:19+00:00">2020-04-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -490,7 +568,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-14 07:13:21" itemprop="dateModified" datetime="2020-04-14T07:13:21+00:00">2020-04-14</time>
+                <time title="Modified: 2020-04-14 07:24:19" itemprop="dateModified" datetime="2020-04-14T07:24:19+00:00">2020-04-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -568,7 +646,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-14 07:13:21" itemprop="dateModified" datetime="2020-04-14T07:13:21+00:00">2020-04-14</time>
+                <time title="Modified: 2020-04-14 07:24:19" itemprop="dateModified" datetime="2020-04-14T07:24:19+00:00">2020-04-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -646,7 +724,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-14 07:13:21" itemprop="dateModified" datetime="2020-04-14T07:13:21+00:00">2020-04-14</time>
+                <time title="Modified: 2020-04-14 07:24:19" itemprop="dateModified" datetime="2020-04-14T07:24:19+00:00">2020-04-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -724,7 +802,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-14 07:13:21" itemprop="dateModified" datetime="2020-04-14T07:13:21+00:00">2020-04-14</time>
+                <time title="Modified: 2020-04-14 07:24:19" itemprop="dateModified" datetime="2020-04-14T07:24:19+00:00">2020-04-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -802,7 +880,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-14 07:13:21" itemprop="dateModified" datetime="2020-04-14T07:13:21+00:00">2020-04-14</time>
+                <time title="Modified: 2020-04-14 07:24:19" itemprop="dateModified" datetime="2020-04-14T07:24:19+00:00">2020-04-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -826,80 +904,6 @@
 
       
           <p>昨天开车回来，开了不到4个小时，下车就感觉头不舒服。 吹了一路空调，今早就头疼，这体格是真不行了。 这前两天还走乡道，地盘都磕了，这还不知道咋样呢。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/10/e4-b8-83-e6-9c-88-e9-85-b7-e6-9a-91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Winnux">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Winnux's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/07/10/e4-b8-83-e6-9c-88-e9-85-b7-e6-9a-91/" class="post-title-link" itemprop="url">七月酷暑</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2017-07-10 16:37:14" itemprop="dateCreated datePublished" datetime="2017-07-10T16:37:14+00:00">2017-07-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-14 07:13:21" itemprop="dateModified" datetime="2020-04-14T07:13:21+00:00">2020-04-14</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Bob/" itemprop="url" rel="index"><span itemprop="name">Bob</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>今年哈尔滨不知道怎么了，天气异常闷热。 天一热，总喜欢摄入凉东西，反而可能会导致内火。FIona也有点咳嗽，旅游的事也一直没敢订。 状态不好，几个项目都没啥心思做，也不见啥收益。 手头工作一天也不愿意弄，好在现在人也多了，调动起来也能应付过去。 其他技术方面的没心思深入，都暂时停滞了。 岁数大了，感觉是有点不如以前了，还得保持原来的那种心态。 最近要弄的面也挺宽的，都每太深入。 总结一下，还是先要把qt那个项目结尾了（最后商务啥情况不好说） 其次，构建一个插件框架把linux管理机配置ui建立起来。 其他方面的，signalr、websocket、go项目、pad眼镜等还得按情况启动吧</p>
 
       
     </div>
@@ -985,7 +989,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">176</span>
+          <span class="site-state-item-count">177</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

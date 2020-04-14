@@ -159,6 +159,84 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/24/e5-85-a8-e6-a0-88-e5-b7-a5-e7-a8-8b-e5-b8-88-e5-85-bb-e6-88-90-e8-ae-b0-e5-bd-9510/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Winnux">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Winnux's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/03/24/e5-85-a8-e6-a0-88-e5-b7-a5-e7-a8-8b-e5-b8-88-e5-85-bb-e6-88-90-e8-ae-b0-e5-bd-9510/" class="post-title-link" itemprop="url">全栈工程师养成记录10</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-03-24 10:42:59" itemprop="dateCreated datePublished" datetime="2017-03-24T10:42:59+00:00">2017-03-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-04-14 07:24:19" itemprop="dateModified" datetime="2020-04-14T07:24:19+00:00">2020-04-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Bob/" itemprop="url" rel="index"><span itemprop="name">Bob</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Bob/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>关于go的现地侧数据采集程序，上午实验了一下整体架构，做了个测试程序。代码100+行，基本完成了从后端RESTFUL Service API读取数据，然后通过modbus发送到控制设备过程。 这个100+的go程序很简单，主程序启动两个协程，一个处理RestFUL ，一个处理modbus。RestFUL协程 数据读取（GET），解析返回的json对象，如果测试的数据内容改变了，就通过channel把变化数据发给modbus协程；modbus协程正常不断巡检设备数据，同时监听channel，一旦收到下发控制就执行写coil操作。 同时主程序监听系统ctrl+C，收到后，通过channel通知工作协程退出，然后设置一个waitGroup等待协程退出，最后关闭。 用go写这些内容非常简单，比写c代码轻松多了，如果用c的话估计工作量要放大不少，而且还得仔细考虑线程关系等。 在本机测试完毕，现在下一步就能按实际数据把mongodb那里数据schema建立起来，然后把nodejs后端服务完全按实际数据要求做完；接下来就是android app的ui设计及数据刷新机制设计；整体完毕后就是go+nodejs mongodb+android app这一套完整的数据采集-处理-发布显示的完整生态链了。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/24/e6-b2-89-e8-bf-b7-e4-ba-8egolang-e4-ba-86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -190,7 +268,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-14 07:13:21" itemprop="dateModified" datetime="2020-04-14T07:13:21+00:00">2020-04-14</time>
+                <time title="Modified: 2020-04-14 07:24:19" itemprop="dateModified" datetime="2020-04-14T07:24:19+00:00">2020-04-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -268,7 +346,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-14 07:13:21" itemprop="dateModified" datetime="2020-04-14T07:13:21+00:00">2020-04-14</time>
+                <time title="Modified: 2020-04-14 07:24:19" itemprop="dateModified" datetime="2020-04-14T07:24:19+00:00">2020-04-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -346,7 +424,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-14 07:13:21" itemprop="dateModified" datetime="2020-04-14T07:13:21+00:00">2020-04-14</time>
+                <time title="Modified: 2020-04-14 07:24:19" itemprop="dateModified" datetime="2020-04-14T07:24:19+00:00">2020-04-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -424,7 +502,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-14 07:13:21" itemprop="dateModified" datetime="2020-04-14T07:13:21+00:00">2020-04-14</time>
+                <time title="Modified: 2020-04-14 07:24:19" itemprop="dateModified" datetime="2020-04-14T07:24:19+00:00">2020-04-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -498,7 +576,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-14 07:13:21" itemprop="dateModified" datetime="2020-04-14T07:13:21+00:00">2020-04-14</time>
+                <time title="Modified: 2020-04-14 07:24:19" itemprop="dateModified" datetime="2020-04-14T07:24:19+00:00">2020-04-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -612,7 +690,7 @@ protected void deliverResponse(T response) {
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-14 07:13:21" itemprop="dateModified" datetime="2020-04-14T07:13:21+00:00">2020-04-14</time>
+                <time title="Modified: 2020-04-14 07:24:19" itemprop="dateModified" datetime="2020-04-14T07:24:19+00:00">2020-04-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -686,7 +764,7 @@ protected void deliverResponse(T response) {
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-14 07:13:21" itemprop="dateModified" datetime="2020-04-14T07:13:21+00:00">2020-04-14</time>
+                <time title="Modified: 2020-04-14 07:24:19" itemprop="dateModified" datetime="2020-04-14T07:24:19+00:00">2020-04-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -764,7 +842,7 @@ protected void deliverResponse(T response) {
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-14 07:13:21" itemprop="dateModified" datetime="2020-04-14T07:13:21+00:00">2020-04-14</time>
+                <time title="Modified: 2020-04-14 07:24:19" itemprop="dateModified" datetime="2020-04-14T07:24:19+00:00">2020-04-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -842,7 +920,7 @@ protected void deliverResponse(T response) {
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-14 07:13:21" itemprop="dateModified" datetime="2020-04-14T07:13:21+00:00">2020-04-14</time>
+                <time title="Modified: 2020-04-14 07:24:19" itemprop="dateModified" datetime="2020-04-14T07:24:19+00:00">2020-04-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -870,84 +948,6 @@ protected void deliverResponse(T response) {
 
       
           <p>今天一上午连续入坑，这个后端nodejs+mongoose+express 第一个坑，postman发送数组参数，查了一下发现无论怎么写form-data都不行，最后直接raw模式设置为json，手写的json，这样可以了，收到后是数组了。 第二个坑，mongoose默认schema存collection的名会自动变为复数，例如bear 变为bears，这个关键也没啥，db里面show一下也能看到，关键我的一个findone查询没有结果，起初以为是这个原因，设置schema时候加了collection名，还是不行。接下来就是第三个坑 第三个坑，也不能说是坑吧，主要是还不熟悉nodejs这个生态系统，好多东西的思维方式不对，还不是js世界的思路，我想mongoose查询符合uid名符合post过来的参数数组的所有doc，一开始按参数数组写个循环调用findone，这一下犯了两个错误，直接结果就是死活查不到数据。第一个错误，nodejs的工作模型错误，在循环里调用findone，而且还提供了回调func，这基本就搞死了。异步回调函数没法进入了；第二个错误，查找多个匹配应该是js的 in array 方式查询条件，mongoose是支持condition写成{“uid”：{$in: param_array}}这样的，这直接就把和param_array匹配的所有结果返回了，在callback func中直接处理就可以了。 这一上午，就一个查询，搞的死去活来，google半天，一直都没找对方向。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/01/e5-85-a8-e6-a0-88-e5-b7-a5-e7-a8-8b-e5-b8-88-e5-85-bb-e6-88-90-e8-ae-b0-e5-bd-954/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Winnux">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Winnux's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/03/01/e5-85-a8-e6-a0-88-e5-b7-a5-e7-a8-8b-e5-b8-88-e5-85-bb-e6-88-90-e8-ae-b0-e5-bd-954/" class="post-title-link" itemprop="url">全栈工程师养成记录4</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2017-03-01 10:29:29" itemprop="dateCreated datePublished" datetime="2017-03-01T10:29:29+00:00">2017-03-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-14 07:13:21" itemprop="dateModified" datetime="2020-04-14T07:13:21+00:00">2020-04-14</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Bob/" itemprop="url" rel="index"><span itemprop="name">Bob</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Bob/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>今天开始，继续。 昨天下午整理后端，前端两个项目，发现一个生态圈一个模式啊。 后端nodejs生态圈，mongodb mongoose等等，挺有意思，开发模式太快了。 前端用用butterknife发现也挺好，还要实践的有gson等等。 这一大堆东西圈在一起，做这个简单应用貌似足够了，也足够快速了。 另外，考虑如果后端用go是不是也可以，前天简单考虑了一下，没有选择。感觉nodejs已经够了。 关键go的web RESTFUL框架也不熟，nodejs这面上手太快了。 另外，这个后端基本上experss的大部分都用不上，IDE也没用，webstorm基本不用了，后端就在vscode里开发调试足够了。 前端volley加上一些辅助库，基本够用了，想要UI漂亮一些也有很多UI库可用。 这个生态圈和c/c++，qt那些生态圈差别很大，大量开源的东西可作为工作基础。 很有意思。玩的高兴！</p>
 
       
     </div>
@@ -1033,7 +1033,7 @@ protected void deliverResponse(T response) {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">176</span>
+          <span class="site-state-item-count">177</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
