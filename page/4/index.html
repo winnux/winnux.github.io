@@ -159,6 +159,84 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/05/grpc-e6-9c-8d-e5-8a-a1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Winnux">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Winnux's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/09/05/grpc-e6-9c-8d-e5-8a-a1/" class="post-title-link" itemprop="url">grpc服务</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-09-05 14:22:42" itemprop="dateCreated datePublished" datetime="2018-09-05T14:22:42+00:00">2018-09-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-04-16 07:42:04" itemprop="dateModified" datetime="2020-04-16T07:42:04+00:00">2020-04-16</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Bob/" itemprop="url" rel="index"><span itemprop="name">Bob</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Bob/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>一直想把新技术带到具体工控业务领域，最近测试了grpc+consul做服务分治的模型在工业应用中的实践。 服务发现-服务注册这些基本需求，熔断、限流这些感觉在工业内网的环境中可有可无。加密这些在日渐严格的内网中也是必须的。 consul的服务注册http api实际不使用其对应sdk也能直接访问，两种方式： 1.按照restful api接口直接get 2.按照dns解析域名方式   两种方式各有不同，但最终通过解析返回数据都能拿到对应服务名的所有服务实例ip地址和端口号 wireshark分析实际consul api go的实现中服务发现那里就是直接get了consul服务的api接口的封装。 用QT在c++环境下模拟了一下dns的这个方案，也能正常工作。 目前看还有一个没明白具体使用方式的就是grpc中balance的使用，目前用的withbalancer函数已经被官方标注为deprecated了，推荐使用balancer包里的接口，看了一下这些接口大概是个builder模式的接口，但具体怎么使用没有详细的分析。 目前用这个withbalancer也能正常工作。 下一步有时间要结合docker做一个实际的工业场景服务分治部署实验，可以定义业务有关的服务接口（仅简单实现返回），然后把这个分布式服务环境跑起来，结合带UI的客户端消费者一同测试一下具体应用情况。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/03/e9-97-b7-e7-83-ad-e7-9a-84-e5-a4-8f/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -190,7 +268,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-16 02:52:42" itemprop="dateModified" datetime="2020-04-16T02:52:42+00:00">2020-04-16</time>
+                <time title="Modified: 2020-04-16 07:42:04" itemprop="dateModified" datetime="2020-04-16T07:42:04+00:00">2020-04-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -272,7 +350,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-16 02:52:42" itemprop="dateModified" datetime="2020-04-16T02:52:42+00:00">2020-04-16</time>
+                <time title="Modified: 2020-04-16 07:42:04" itemprop="dateModified" datetime="2020-04-16T07:42:04+00:00">2020-04-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -346,7 +424,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-16 02:52:42" itemprop="dateModified" datetime="2020-04-16T02:52:42+00:00">2020-04-16</time>
+                <time title="Modified: 2020-04-16 07:42:04" itemprop="dateModified" datetime="2020-04-16T07:42:04+00:00">2020-04-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -424,7 +502,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-16 02:52:42" itemprop="dateModified" datetime="2020-04-16T02:52:42+00:00">2020-04-16</time>
+                <time title="Modified: 2020-04-16 07:42:04" itemprop="dateModified" datetime="2020-04-16T07:42:04+00:00">2020-04-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -506,7 +584,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-16 02:52:42" itemprop="dateModified" datetime="2020-04-16T02:52:42+00:00">2020-04-16</time>
+                <time title="Modified: 2020-04-16 07:42:04" itemprop="dateModified" datetime="2020-04-16T07:42:04+00:00">2020-04-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -584,7 +662,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-16 02:52:42" itemprop="dateModified" datetime="2020-04-16T02:52:42+00:00">2020-04-16</time>
+                <time title="Modified: 2020-04-16 07:42:04" itemprop="dateModified" datetime="2020-04-16T07:42:04+00:00">2020-04-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -662,7 +740,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-16 02:52:42" itemprop="dateModified" datetime="2020-04-16T02:52:42+00:00">2020-04-16</time>
+                <time title="Modified: 2020-04-16 07:42:04" itemprop="dateModified" datetime="2020-04-16T07:42:04+00:00">2020-04-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -736,7 +814,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-16 02:52:42" itemprop="dateModified" datetime="2020-04-16T02:52:42+00:00">2020-04-16</time>
+                <time title="Modified: 2020-04-16 07:42:04" itemprop="dateModified" datetime="2020-04-16T07:42:04+00:00">2020-04-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -810,7 +888,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-16 02:52:42" itemprop="dateModified" datetime="2020-04-16T02:52:42+00:00">2020-04-16</time>
+                <time title="Modified: 2020-04-16 07:42:04" itemprop="dateModified" datetime="2020-04-16T07:42:04+00:00">2020-04-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -838,84 +916,6 @@
 
       
           <p>轻量服务器，呵呵，好简陋的，胜在简洁吧 1cpu 感觉带1000客户都够呛 不过，阿里目前的集成挺不错，搭建过程很顺利 一共建立了nodejs、mongodb、parse server、nginx反向代理、https证书这一大套 证书用的阿里免费的，挺方便。 这一堆弄完，一个后端就算简单完成了。 没有代码，以后如果需要可以用express包一下parse去搞。 mongo目前开了外网，虽然设置了用户管理，但实际部署应用还的关。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/09/e3-80-8amicroservice-in-golang-e3-80-8b-e8-af-bb-e4-b9-a6-e7-ac-94-e8-ae-b01/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Winnux">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Winnux's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/05/09/e3-80-8amicroservice-in-golang-e3-80-8b-e8-af-bb-e4-b9-a6-e7-ac-94-e8-ae-b01/" class="post-title-link" itemprop="url">《Microservice in golang》读书笔记1</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2018-05-09 10:07:46" itemprop="dateCreated datePublished" datetime="2018-05-09T10:07:46+00:00">2018-05-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-16 02:52:42" itemprop="dateModified" datetime="2020-04-16T02:52:42+00:00">2020-04-16</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Bob/" itemprop="url" rel="index"><span itemprop="name">Bob</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Bob/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>最近比较感兴趣的是天文学、数学分析、AI、还有这个Cloud Native。 《Microservice in golang》这个系列教程是Ewan Valentine在博客中写的一个golang在microservice中的应用，包括了cloud native的很多方面，作为一个练习项目足够。以前粗略的看过前4期，没有看完，最近看这个系列到第10期了，已经结束了。 从我看到的情况，应该是没有涵盖servcie mesh部分内容，但我对这个mesh的体系一直心存敬而远之的感觉。前几天看程序员头条里一个作者写的一段话比较有同感，大致意思是如果micro service在1000个以下不建议上service mesh，有一个统一的gateway api网关做鉴权、限流、接入管理就可以；大于1000个service以上，建议考虑service mesh，毕竟这个时候再自行管理实际工作量要大于直接使用现有的工具了。 我的观点是目前的基于http restful api的service之间交互（代表是spring）应该会慢慢转变为二进制rpc机制，如gRPC等。我一贯对google的技术fans，所以对gRPC更是非常喜欢，尤其是4种rpc调用方式涵盖了server push，stream 等方方面面，protobuf也很好，用着体系感觉很强，开源界的一个大腿啊。 记录一下测试机器（ubuntu16.04 x64）上建立环境 安装grpc https_proxy=….. go get google.golang.org/grpc -v 安装protobuf 直接在github下载了protobuf的二进制包拷贝到/usr/bin下了 安装protobuf-go-gen go get -a github.com/golang/protobuf/protoc-gen-go 然后把go的bin目录加入PATH 在.zshrc下 export PATH=$PATH：/go bin source ~/.zshrc 然后就可以直接用protobuf建立服务模型，编译出golang源码了 如 protoc -I. proto/consignment/consignment.proto –go_out=plugins=grpc:. 这样在proto/consignment目录下就生成一个对应的golang源文件了。 btw,发现这个oh-my-zsh很好，都该zsh shell了</p>
 
       
     </div>
@@ -1001,7 +1001,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">178</span>
+          <span class="site-state-item-count">179</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
