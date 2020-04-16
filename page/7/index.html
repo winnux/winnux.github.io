@@ -159,6 +159,84 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/21/e6-8a-98-e8-85-beminikube-e7-9a-84-e4-b8-80-e5-a4-a9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Winnux">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Winnux's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/12/21/e6-8a-98-e8-85-beminikube-e7-9a-84-e4-b8-80-e5-a4-a9/" class="post-title-link" itemprop="url">折腾minikube的一天</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-12-21 14:06:37" itemprop="dateCreated datePublished" datetime="2017-12-21T14:06:37+00:00">2017-12-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-04-16 02:52:42" itemprop="dateModified" datetime="2020-04-16T02:52:42+00:00">2020-04-16</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Bob/" itemprop="url" rel="index"><span itemprop="name">Bob</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Bob/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>从昨天下午开始，开始折腾minikube，记录一下折腾记录，顺带吐槽一下G-F-W windows下打算用hyperv做vm-driver，启动后各种水土不服，没具体深入研究，放弃了。 转移到linux工作站继续吧，好吧，剩下来的原本可能只需要一支烟的功夫生生的折腾了一天，基本在和墙作战。 linux下安装virtualbox，强烈不推荐linux直接host docker开始，那样会有好多东西都是root级别的，非常不安全。 linux下兴致勃勃地安装完了，顺带说一下，墙有时抽风，记得一开始minikube start后顺利的下载了minikube的iso，后来说什么也不行了。 可想而知，在伟大的墙上，撞得满头包。 好吧，我准备从头来，clone minikube源码，查找所有gcr.io的替换成阿里的镜像源，我记得我是整个目录所有文件都替换了，满以为这下该没问题了。启动，然后等着，等着，发现第一个kube-system namespace 下的pod（记得是addon-manager吧）就一直containercreating，这个慢慢无期。 kubectl describe pods –all-namespaces下看到这个pod的image源已经是阿里的url了，而且特意去阿里看看那个版本6.4beta2也有啊，就是卡在containercreating，看来还是有问题 minikube logs一下，我的个神啊，怎么替换了所有gcr，还去gcr pull image 找不到啥原因了，没办法，继续在阿里云上找，看到阿里貌似有个处理过的minikube二进制，应该是都用的国内源，这下好了。 curl -Lo minikube <a href="http://kubernetes.oss-cn-hangzhou.aliyuncs.com/minikube/releases/v0.23.0/minikube-linux-amd64" target="_blank" rel="noopener">http://kubernetes.oss-cn-hangzhou.aliyuncs.com/minikube/releases/v0.23.0/minikube-linux-amd64</a> &amp;&amp; chmod +x minikube &amp;&amp; sudo mv minikube /usr/local/bin/ 版本0.23，没去管，貌似google上的是0.24了，不管了。 下载下来，然后minikube delete 原来的，重头再来 参考各种坑，这回加了一些启动参数， 具体启动命令行如下： minikube start –registry-mirror=<a href="https://registry.docker-cn.com" target="_blank" rel="noopener">https://registry.docker-cn.com</a> –docker-env HTTP_PROXY=<a href="http://172.16.64.210:7777" target="_blank" rel="noopener">http://172.16.64.210:7777</a> –docker-env HTTPS_PROXY=<a href="http://172.16.64.210:7777" target="_blank" rel="noopener">http://172.16.64.210:7777</a> 其中两个docker的代理是我的一台能ssr fuck g-f-w的windows机器通过cow（以前介绍过的golang编写的二级代理，sock5转HTTP）做的代理。 这回好了，启动… 等一会，运行 kubectl describe pods –all-namespaces 哈哈，3个kube-system的pod都正常启动了，状态终于是running了，热泪盈眶啊 这个中间也幸亏参考了如下两个记录 <a href="http://blog.csdn.net/guizaijianchic/article/details/78421800" target="_blank" rel="noopener">http://blog.csdn.net/guizaijianchic/article/details/78421800</a> <a href="https://blog.alexellis.io/minikube-behind-proxy/" target="_blank" rel="noopener">https://blog.alexellis.io/minikube-behind-proxy/</a> <a href="https://yq.aliyun.com/articles/221687" target="_blank" rel="noopener">https://yq.aliyun.com/articles/221687</a> 想起来前几周看老外那个《Advanced Cloud Native Go》教学视频，看人家轻轻松松 start一下，就启动minikube， 当时我可没想到在这里我付出的时间是n倍于人家，而且研究的一些东西都是没啥用的，主要的还没开始呢。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/18/when-you-are-old/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -190,7 +268,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-14 07:24:19" itemprop="dateModified" datetime="2020-04-14T07:24:19+00:00">2020-04-14</time>
+                <time title="Modified: 2020-04-16 02:52:42" itemprop="dateModified" datetime="2020-04-16T02:52:42+00:00">2020-04-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -263,7 +341,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-14 07:24:19" itemprop="dateModified" datetime="2020-04-14T07:24:19+00:00">2020-04-14</time>
+                <time title="Modified: 2020-04-16 02:52:42" itemprop="dateModified" datetime="2020-04-16T02:52:42+00:00">2020-04-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -337,7 +415,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-14 07:24:19" itemprop="dateModified" datetime="2020-04-14T07:24:19+00:00">2020-04-14</time>
+                <time title="Modified: 2020-04-16 02:52:42" itemprop="dateModified" datetime="2020-04-16T02:52:42+00:00">2020-04-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -417,7 +495,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-14 07:24:19" itemprop="dateModified" datetime="2020-04-14T07:24:19+00:00">2020-04-14</time>
+                <time title="Modified: 2020-04-16 02:52:42" itemprop="dateModified" datetime="2020-04-16T02:52:42+00:00">2020-04-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -497,7 +575,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-14 07:24:19" itemprop="dateModified" datetime="2020-04-14T07:24:19+00:00">2020-04-14</time>
+                <time title="Modified: 2020-04-16 02:52:42" itemprop="dateModified" datetime="2020-04-16T02:52:42+00:00">2020-04-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -577,7 +655,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-14 07:24:19" itemprop="dateModified" datetime="2020-04-14T07:24:19+00:00">2020-04-14</time>
+                <time title="Modified: 2020-04-16 02:52:42" itemprop="dateModified" datetime="2020-04-16T02:52:42+00:00">2020-04-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -653,7 +731,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-14 07:24:19" itemprop="dateModified" datetime="2020-04-14T07:24:19+00:00">2020-04-14</time>
+                <time title="Modified: 2020-04-16 02:52:42" itemprop="dateModified" datetime="2020-04-16T02:52:42+00:00">2020-04-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -727,7 +805,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-14 07:24:19" itemprop="dateModified" datetime="2020-04-14T07:24:19+00:00">2020-04-14</time>
+                <time title="Modified: 2020-04-16 02:52:42" itemprop="dateModified" datetime="2020-04-16T02:52:42+00:00">2020-04-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -817,7 +895,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-14 07:24:19" itemprop="dateModified" datetime="2020-04-14T07:24:19+00:00">2020-04-14</time>
+                <time title="Modified: 2020-04-16 02:52:42" itemprop="dateModified" datetime="2020-04-16T02:52:42+00:00">2020-04-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -841,84 +919,6 @@
 
       
           <p>拜墙之故，大宋go get google包是真杀脑细胞啊 记录一下折腾的过程。 上午搞得火起，乱事还多，就放下了。下午静一静想了一下，估计是ssr代理这种方式和vpn的不同才导致的。 google了一下go get，也发现了关于代理的问题。 最后，还是从github上下了个cow的代理程序，这个cow也是golang编制的，可以把任意二级代理转为http代理 这样，我就先写个配置把ssr的本地代理sock5开开（实际cow直接可连ssr，具体没折腾）。然后再系统里添加http_proxy 和 https_proxy环境变量,设置为cow的端口<a href="http://127.0.0.1:7777.最后再重新登陆一次实验。">http://127.0.0.1:7777.最后再重新登陆一次实验。</a> 打开 ssr，运行cow，然后go get   一切正常了，终于折腾完了。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/01/wtf-wall-wall-wall/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Winnux">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Winnux's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/11/01/wtf-wall-wall-wall/" class="post-title-link" itemprop="url">WTF-wall wall wall</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2017-11-01 10:00:51" itemprop="dateCreated datePublished" datetime="2017-11-01T10:00:51+00:00">2017-11-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-14 07:24:19" itemprop="dateModified" datetime="2020-04-14T07:24:19+00:00">2020-04-14</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Bob/" itemprop="url" rel="index"><span itemprop="name">Bob</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Bob/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>自从换了ssr后golang得google库一直处于无法使用状态，原来的vpn可以 现在死活是不行了。 每次手动管理golang包，grpc那么多依赖，头大了。</p>
 
       
     </div>
@@ -1004,7 +1004,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">177</span>
+          <span class="site-state-item-count">178</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

@@ -159,6 +159,84 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/02/e5-85-a8-e6-a0-88-e5-b7-a5-e7-a8-8b-e5-b8-88-e5-85-bb-e6-88-90-e8-ae-b0-e5-bd-955/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Winnux">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Winnux's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/03/02/e5-85-a8-e6-a0-88-e5-b7-a5-e7-a8-8b-e5-b8-88-e5-85-bb-e6-88-90-e8-ae-b0-e5-bd-955/" class="post-title-link" itemprop="url">全栈工程师养成记录5</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-03-02 11:03:43" itemprop="dateCreated datePublished" datetime="2017-03-02T11:03:43+00:00">2017-03-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-04-16 02:52:42" itemprop="dateModified" datetime="2020-04-16T02:52:42+00:00">2020-04-16</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Bob/" itemprop="url" rel="index"><span itemprop="name">Bob</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Bob/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>今天一上午连续入坑，这个后端nodejs+mongoose+express 第一个坑，postman发送数组参数，查了一下发现无论怎么写form-data都不行，最后直接raw模式设置为json，手写的json，这样可以了，收到后是数组了。 第二个坑，mongoose默认schema存collection的名会自动变为复数，例如bear 变为bears，这个关键也没啥，db里面show一下也能看到，关键我的一个findone查询没有结果，起初以为是这个原因，设置schema时候加了collection名，还是不行。接下来就是第三个坑 第三个坑，也不能说是坑吧，主要是还不熟悉nodejs这个生态系统，好多东西的思维方式不对，还不是js世界的思路，我想mongoose查询符合uid名符合post过来的参数数组的所有doc，一开始按参数数组写个循环调用findone，这一下犯了两个错误，直接结果就是死活查不到数据。第一个错误，nodejs的工作模型错误，在循环里调用findone，而且还提供了回调func，这基本就搞死了。异步回调函数没法进入了；第二个错误，查找多个匹配应该是js的 in array 方式查询条件，mongoose是支持condition写成{“uid”：{$in: param_array}}这样的，这直接就把和param_array匹配的所有结果返回了，在callback func中直接处理就可以了。 这一上午，就一个查询，搞的死去活来，google半天，一直都没找对方向。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/01/e5-85-a8-e6-a0-88-e5-b7-a5-e7-a8-8b-e5-b8-88-e5-85-bb-e6-88-90-e8-ae-b0-e5-bd-954/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -190,7 +268,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-14 07:24:19" itemprop="dateModified" datetime="2020-04-14T07:24:19+00:00">2020-04-14</time>
+                <time title="Modified: 2020-04-16 02:52:42" itemprop="dateModified" datetime="2020-04-16T02:52:42+00:00">2020-04-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -268,7 +346,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-14 07:24:19" itemprop="dateModified" datetime="2020-04-14T07:24:19+00:00">2020-04-14</time>
+                <time title="Modified: 2020-04-16 02:52:42" itemprop="dateModified" datetime="2020-04-16T02:52:42+00:00">2020-04-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -351,7 +429,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-14 07:24:19" itemprop="dateModified" datetime="2020-04-14T07:24:19+00:00">2020-04-14</time>
+                <time title="Modified: 2020-04-16 02:52:42" itemprop="dateModified" datetime="2020-04-16T02:52:42+00:00">2020-04-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -425,7 +503,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-14 07:24:19" itemprop="dateModified" datetime="2020-04-14T07:24:19+00:00">2020-04-14</time>
+                <time title="Modified: 2020-04-16 02:52:42" itemprop="dateModified" datetime="2020-04-16T02:52:42+00:00">2020-04-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -499,7 +577,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-14 07:24:19" itemprop="dateModified" datetime="2020-04-14T07:24:19+00:00">2020-04-14</time>
+                <time title="Modified: 2020-04-16 02:52:42" itemprop="dateModified" datetime="2020-04-16T02:52:42+00:00">2020-04-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -577,7 +655,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-14 07:24:19" itemprop="dateModified" datetime="2020-04-14T07:24:19+00:00">2020-04-14</time>
+                <time title="Modified: 2020-04-16 02:52:42" itemprop="dateModified" datetime="2020-04-16T02:52:42+00:00">2020-04-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -655,7 +733,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-14 07:24:19" itemprop="dateModified" datetime="2020-04-14T07:24:19+00:00">2020-04-14</time>
+                <time title="Modified: 2020-04-16 02:52:42" itemprop="dateModified" datetime="2020-04-16T02:52:42+00:00">2020-04-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -733,7 +811,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-14 07:24:19" itemprop="dateModified" datetime="2020-04-14T07:24:19+00:00">2020-04-14</time>
+                <time title="Modified: 2020-04-16 02:52:42" itemprop="dateModified" datetime="2020-04-16T02:52:42+00:00">2020-04-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -807,7 +885,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-14 07:24:19" itemprop="dateModified" datetime="2020-04-14T07:24:19+00:00">2020-04-14</time>
+                <time title="Modified: 2020-04-16 02:52:42" itemprop="dateModified" datetime="2020-04-16T02:52:42+00:00">2020-04-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -831,80 +909,6 @@
 
       
           <p>我的第一篇文章，今天我写了一篇字。还写了一篇数学，我啊。 我用语音输入法输入的，这是我写的第一篇文章。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/06/fiona-e7-9a-84-e7-a9-ba-e9-97-b4-e6-90-ac-e5-ae-b6-e5-88-b0bluehost-e4-ba-86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Winnux">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Winnux's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/02/06/fiona-e7-9a-84-e7-a9-ba-e9-97-b4-e6-90-ac-e5-ae-b6-e5-88-b0bluehost-e4-ba-86/" class="post-title-link" itemprop="url">Fiona的空间搬家到bluehost了</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2017-02-06 10:58:49" itemprop="dateCreated datePublished" datetime="2017-02-06T10:58:49+00:00">2017-02-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-14 07:24:19" itemprop="dateModified" datetime="2020-04-14T07:24:19+00:00">2020-04-14</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Bob/" itemprop="url" rel="index"><span itemprop="name">Bob</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Fiona的wp博客历经独立ip主机、联通封80端口等等后，2017年春节后终于固定了。 未来的三年，imfiona会一直在这个虚拟空间主机服务商提供服务了。 由于wp版本等等问题，加之原来的blog数量不多，我基本是copy-paste的转移了原来的所有blog。 接下来的日子，我和fiona力争多发blog，记录生活点滴，回味精彩瞬间。</p>
 
       
     </div>
@@ -990,7 +994,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">177</span>
+          <span class="site-state-item-count">178</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
