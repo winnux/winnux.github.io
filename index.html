@@ -159,6 +159,257 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/18/%E7%BB%88%E4%BA%8E%E8%A7%A3%E5%86%B3%E4%BA%86windows10%E5%85%B3%E6%9C%BA%E4%B8%8D%E6%96%AD%E7%94%B5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Winnux">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Winnux's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/18/%E7%BB%88%E4%BA%8E%E8%A7%A3%E5%86%B3%E4%BA%86windows10%E5%85%B3%E6%9C%BA%E4%B8%8D%E6%96%AD%E7%94%B5/" class="post-title-link" itemprop="url">终于解决了windows10关机不断电</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-04-18 15:31:29 / Modified: 07:57:08" itemprop="dateCreated datePublished" datetime="2020-04-18T15:31:29+00:00">2020-04-18</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Dell的工作站扩充了若干硬件后，一直有一个很纠结的问题。无法正常断电，关机、重启等等所有的涉及到电源断开的操作都无法正常完成。</p>
+<p>很久以前记得HP的工作站类似的问题，当时是更换了intel的me驱动搞定了，这回发现事情又有变化了。首先intel的me驱动目前版本已经很高了，远不是当年的9.X、11.X可以，降级驱动基本上不可取了。</p>
+<p>继续折腾过程中，操作系统电源选项、关闭快速启动，无效；折腾BIOS配置，改了若干有的没的，无效；操作系统里面继续更换显卡（n记最新），无效；折腾新windows，无效；折腾网卡配置，去掉电源有关，去掉远程唤醒，无效；</p>
+<p>终于，在孜孜不倦折腾好久后，放弃了折腾，佛系吧，不断就不断吧，忍忍就习惯了。</p>
+<p>这样“习惯”了好几周，终于，今天有条件用这个机器的硬盘试验了同型号、同配置的机器发现没有同类问题，那么问题肯定出在机器后增加的若干硬件了，去掉内存、显卡、网卡测试了半天，发现问题居然出在可疑度基本没有的网卡上了。</p>
+<p>这个realtek 的网卡已经使用了n年，是从上一台机器上拔下来后在这个工作站上使用的。</p>
+<p>换了个intel的网卡，这个工作站就都好了。</p>
+<p>终于，这个折腾了好久的工作站能正常的断电了，舒服了。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/18/synology1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Winnux">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Winnux's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/18/synology1/" class="post-title-link" itemprop="url">群晖初始化设置的一个注意事项</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-04-18 07:57:08" itemprop="dateCreated datePublished" datetime="2020-04-18T07:57:08+00:00">2020-04-18</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="记录几个问题"><a href="#记录几个问题" class="headerlink" title="记录几个问题"></a>记录几个问题</h2><h3 id="Hexo的帮助内容比较陈旧"><a href="#Hexo的帮助内容比较陈旧" class="headerlink" title="Hexo的帮助内容比较陈旧"></a>Hexo的帮助内容比较陈旧</h3><h3 id="群晖DS918Plus开工"><a href="#群晖DS918Plus开工" class="headerlink" title="群晖DS918Plus开工"></a>群晖DS918Plus开工</h3><p>奔着synology的强大的套件功能去了，918+到位开始上电，按照wifi同网段网口连接网线，测试一切顺利。</p>
+<p>放到公司机柜里面后，改用直接ip上网，发现怎么设置ip地址和网关、dns都不可用，无法连接网络，一直提示检查dns设置，换了好些dns，始终无法连接外网。套件也打不开，连接服务也不行。</p>
+<p>改了半天发现原来在打开套件面板时提示检查网络设置和时间设置，看了一下时间居然是2000年1月1日呢。缺省的ntp server是google域名的，估计自动同步没同步成功。改了个time.gov重新同步时间到当前时间。然后继续打开套件面板，发现一切都好了。</p>
+<p>这个问题不知道具体原因，解决办法也挺简单，关键还是两个不相关设置。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/18/travis-ci/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Winnux">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Winnux's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/18/travis-ci/" class="post-title-link" itemprop="url">Travis CI 自动部署blog</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-04-18 07:57:08" itemprop="dateCreated datePublished" datetime="2020-04-18T07:57:08+00:00">2020-04-18</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="记录几个问题"><a href="#记录几个问题" class="headerlink" title="记录几个问题"></a>记录几个问题</h2><h3 id="Hexo的帮助内容比较陈旧"><a href="#Hexo的帮助内容比较陈旧" class="headerlink" title="Hexo的帮助内容比较陈旧"></a>Hexo的帮助内容比较陈旧</h3><p>按照里面的设置会遇到几个问题，尤其是在github pages页面介绍的Travis CI集成中发布分支gh-pages的有关内容，实际上现在user or organization的发布页面就是master，不能修改的；只有project sites的发布页是gh-pages。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">sudo: false</span><br><span class="line"></span><br><span class="line">language: node_js</span><br><span class="line"></span><br><span class="line">node_js:</span><br><span class="line"></span><br><span class="line"> \- 10 # use nodejs v10 LTS</span><br><span class="line"></span><br><span class="line">cache: npm</span><br><span class="line"></span><br><span class="line">branches:</span><br><span class="line"></span><br><span class="line"> only:</span><br><span class="line"></span><br><span class="line">  \- source # build master branch only</span><br><span class="line"></span><br><span class="line">script:</span><br><span class="line"></span><br><span class="line"> \- hexo generate # generate static files</span><br><span class="line"></span><br><span class="line">deploy:</span><br><span class="line"></span><br><span class="line"> provider: pages</span><br><span class="line"></span><br><span class="line"> skip-cleanup: true</span><br><span class="line"></span><br><span class="line"> github-token: $GH_TOKEN</span><br><span class="line"></span><br><span class="line"> keep-history: true</span><br><span class="line"></span><br><span class="line"> target_branch: master </span><br><span class="line"></span><br><span class="line"> on:</span><br><span class="line"></span><br><span class="line">  all_branches: true</span><br><span class="line"></span><br><span class="line"> local-dir: public</span><br></pre></td></tr></table></figure>
+
+<p>​    上面我把hexo source放在单独的source branch里面，然后把Travis deploy的branch改为master，这样就能直接发布到页面了，同时一个库管理了hexo的源和publish的页面。对于没有node的环境直接编辑markdown文件就能写blog了。</p>
+<h3 id="使用Next-theme的问题"><a href="#使用Next-theme的问题" class="headerlink" title="使用Next theme的问题"></a>使用Next theme的问题</h3><p>按照next的GitHub描述的第一种方式直接git clone 一个child project到theme 目录next子目录，这种方式本地hexo d可以，如果要使用Travis CI，有一个问题，貌似CI工具在clone代码没有选择recursion方式，这个在ci页面setting里没找到配置的地方，所以这些child repository是没法clone到CI的工作目录的，导致deploy的站点文件都是空文件。开始用CI deploy后，访问站点是空白页面，还没想到是这里的原因，找了半天发现这个问题。</p>
+<p>只能老实的下载next主题的zip包更新到目录中，然后再次push到github，ci工作后再访问页面就正常了。</p>
+<p>Btw，这个页面就是ci工具deploy的。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/18/coronavirusandgorm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Winnux">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Winnux's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/18/coronavirusandgorm/" class="post-title-link" itemprop="url">Coronavirus and gorm</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-04-18 07:57:08" itemprop="dateCreated datePublished" datetime="2020-04-18T07:57:08+00:00">2020-04-18</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="死灰复燃的病毒"><a href="#死灰复燃的病毒" class="headerlink" title="死灰复燃的病毒"></a>死灰复燃的病毒</h3><p>已经偃旗息鼓近1个月的病毒居然又蹦出来了，一下子就是10几个人感染，本已经趋向平缓的局面又紧张起来。算了算周围亲人是否有去过那些高危场所。小学开学可能又要推迟，目前初中开学日期已经推迟了。</p>
+<h3 id="golang的orm"><a href="#golang的orm" class="headerlink" title="golang的orm"></a>golang的orm</h3><p>gin配合sql直接撸项目的日子里，不断被安利gorm，好吧，我要把我的丑陋的“面向过程”go代码进化一下，也要来点golang的 smell，但早已不是一个一头热的“面向对象”用泵了。</p>
+<p>实话说，orm确实好用，节省时间。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/16/dokuwiki%E5%A2%9E%E5%8A%A0%E5%A4%87%E6%A1%88%E5%8F%B7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -182,10 +433,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-04-16 15:29:36 / Modified: 07:42:04" itemprop="dateCreated datePublished" datetime="2020-04-16T15:29:36+00:00">2020-04-16</time>
+              <time title="Created: 2020-04-16 15:29:36" itemprop="dateCreated datePublished" datetime="2020-04-16T15:29:36+00:00">2020-04-16</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-04-18 07:57:08" itemprop="dateModified" datetime="2020-04-18T07:57:08+00:00">2020-04-18</time>
+              </span>
 
           
 
@@ -255,10 +512,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-04-16 10:50:01 / Modified: 07:42:04" itemprop="dateCreated datePublished" datetime="2020-04-16T10:50:01+00:00">2020-04-16</time>
+              <time title="Created: 2020-04-16 10:50:01" itemprop="dateCreated datePublished" datetime="2020-04-16T10:50:01+00:00">2020-04-16</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-04-18 07:57:08" itemprop="dateModified" datetime="2020-04-18T07:57:08+00:00">2020-04-18</time>
+              </span>
 
           
 
@@ -272,191 +535,6 @@
 
       
           <p>最近两天媒体一直在报道西数红盘掺沙子了，部分型号使用了SMR叠瓦盘了，刚刚对了一下新买的红盘型号，好吧，顺利入坑，SMR实锤。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/16/synology1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Winnux">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Winnux's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/16/synology1/" class="post-title-link" itemprop="url">群晖初始化设置的一个注意事项</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-04-16 07:42:04" itemprop="dateCreated datePublished" datetime="2020-04-16T07:42:04+00:00">2020-04-16</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="记录几个问题"><a href="#记录几个问题" class="headerlink" title="记录几个问题"></a>记录几个问题</h2><h3 id="Hexo的帮助内容比较陈旧"><a href="#Hexo的帮助内容比较陈旧" class="headerlink" title="Hexo的帮助内容比较陈旧"></a>Hexo的帮助内容比较陈旧</h3><h3 id="群晖DS918Plus开工"><a href="#群晖DS918Plus开工" class="headerlink" title="群晖DS918Plus开工"></a>群晖DS918Plus开工</h3><p>奔着synology的强大的套件功能去了，918+到位开始上电，按照wifi同网段网口连接网线，测试一切顺利。</p>
-<p>放到公司机柜里面后，改用直接ip上网，发现怎么设置ip地址和网关、dns都不可用，无法连接网络，一直提示检查dns设置，换了好些dns，始终无法连接外网。套件也打不开，连接服务也不行。</p>
-<p>改了半天发现原来在打开套件面板时提示检查网络设置和时间设置，看了一下时间居然是2000年1月1日呢。缺省的ntp server是google域名的，估计自动同步没同步成功。改了个time.gov重新同步时间到当前时间。然后继续打开套件面板，发现一切都好了。</p>
-<p>这个问题不知道具体原因，解决办法也挺简单，关键还是两个不相关设置。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/16/travis-ci/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Winnux">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Winnux's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/16/travis-ci/" class="post-title-link" itemprop="url">Travis CI 自动部署blog</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-04-16 07:42:04" itemprop="dateCreated datePublished" datetime="2020-04-16T07:42:04+00:00">2020-04-16</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="记录几个问题"><a href="#记录几个问题" class="headerlink" title="记录几个问题"></a>记录几个问题</h2><h3 id="Hexo的帮助内容比较陈旧"><a href="#Hexo的帮助内容比较陈旧" class="headerlink" title="Hexo的帮助内容比较陈旧"></a>Hexo的帮助内容比较陈旧</h3><p>按照里面的设置会遇到几个问题，尤其是在github pages页面介绍的Travis CI集成中发布分支gh-pages的有关内容，实际上现在user or organization的发布页面就是master，不能修改的；只有project sites的发布页是gh-pages。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">sudo: false</span><br><span class="line"></span><br><span class="line">language: node_js</span><br><span class="line"></span><br><span class="line">node_js:</span><br><span class="line"></span><br><span class="line"> \- 10 # use nodejs v10 LTS</span><br><span class="line"></span><br><span class="line">cache: npm</span><br><span class="line"></span><br><span class="line">branches:</span><br><span class="line"></span><br><span class="line"> only:</span><br><span class="line"></span><br><span class="line">  \- source # build master branch only</span><br><span class="line"></span><br><span class="line">script:</span><br><span class="line"></span><br><span class="line"> \- hexo generate # generate static files</span><br><span class="line"></span><br><span class="line">deploy:</span><br><span class="line"></span><br><span class="line"> provider: pages</span><br><span class="line"></span><br><span class="line"> skip-cleanup: true</span><br><span class="line"></span><br><span class="line"> github-token: $GH_TOKEN</span><br><span class="line"></span><br><span class="line"> keep-history: true</span><br><span class="line"></span><br><span class="line"> target_branch: master </span><br><span class="line"></span><br><span class="line"> on:</span><br><span class="line"></span><br><span class="line">  all_branches: true</span><br><span class="line"></span><br><span class="line"> local-dir: public</span><br></pre></td></tr></table></figure>
-
-<p>​    上面我把hexo source放在单独的source branch里面，然后把Travis deploy的branch改为master，这样就能直接发布到页面了，同时一个库管理了hexo的源和publish的页面。对于没有node的环境直接编辑markdown文件就能写blog了。</p>
-<h3 id="使用Next-theme的问题"><a href="#使用Next-theme的问题" class="headerlink" title="使用Next theme的问题"></a>使用Next theme的问题</h3><p>按照next的GitHub描述的第一种方式直接git clone 一个child project到theme 目录next子目录，这种方式本地hexo d可以，如果要使用Travis CI，有一个问题，貌似CI工具在clone代码没有选择recursion方式，这个在ci页面setting里没找到配置的地方，所以这些child repository是没法clone到CI的工作目录的，导致deploy的站点文件都是空文件。开始用CI deploy后，访问站点是空白页面，还没想到是这里的原因，找了半天发现这个问题。</p>
-<p>只能老实的下载next主题的zip包更新到目录中，然后再次push到github，ci工作后再访问页面就正常了。</p>
-<p>Btw，这个页面就是ci工具deploy的。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/16/coronavirusandgorm/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Winnux">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Winnux's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/16/coronavirusandgorm/" class="post-title-link" itemprop="url">Coronavirus and gorm</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-04-16 07:42:04" itemprop="dateCreated datePublished" datetime="2020-04-16T07:42:04+00:00">2020-04-16</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="死灰复燃的病毒"><a href="#死灰复燃的病毒" class="headerlink" title="死灰复燃的病毒"></a>死灰复燃的病毒</h3><p>已经偃旗息鼓近1个月的病毒居然又蹦出来了，一下子就是10几个人感染，本已经趋向平缓的局面又紧张起来。算了算周围亲人是否有去过那些高危场所。小学开学可能又要推迟，目前初中开学日期已经推迟了。</p>
-<h3 id="golang的orm"><a href="#golang的orm" class="headerlink" title="golang的orm"></a>golang的orm</h3><p>gin配合sql直接撸项目的日子里，不断被安利gorm，好吧，我要把我的丑陋的“面向过程”go代码进化一下，也要来点golang的 smell，但早已不是一个一头热的“面向对象”用泵了。</p>
-<p>实话说，orm确实好用，节省时间。</p>
 
       
     </div>
@@ -507,7 +585,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-16 07:42:04" itemprop="dateModified" datetime="2020-04-16T07:42:04+00:00">2020-04-16</time>
+                <time title="Modified: 2020-04-18 07:57:08" itemprop="dateModified" datetime="2020-04-18T07:57:08+00:00">2020-04-18</time>
               </span>
 
           
@@ -572,7 +650,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-16 07:42:04" itemprop="dateModified" datetime="2020-04-16T07:42:04+00:00">2020-04-16</time>
+                <time title="Modified: 2020-04-18 07:57:08" itemprop="dateModified" datetime="2020-04-18T07:57:08+00:00">2020-04-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -650,7 +728,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-16 07:42:04" itemprop="dateModified" datetime="2020-04-16T07:42:04+00:00">2020-04-16</time>
+                <time title="Modified: 2020-04-18 07:57:08" itemprop="dateModified" datetime="2020-04-18T07:57:08+00:00">2020-04-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -728,7 +806,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-16 07:42:04" itemprop="dateModified" datetime="2020-04-16T07:42:04+00:00">2020-04-16</time>
+                <time title="Modified: 2020-04-18 07:57:08" itemprop="dateModified" datetime="2020-04-18T07:57:08+00:00">2020-04-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -756,119 +834,6 @@
 
       
           <p>IPFS web site，完全自动化部署。现在看所有需要自动化处理的领域都有人去把人工操作转为自动操作，terminal.io这个站就来了，和原来的Now、openshift有点神似的模式，github直入ipfs到域名转换，完成一个静态网站的发布，一键生成。 简单到小学生都能把这个站部署到ipfs上。从长远的角度来看，也只有这类IPFS的部署是“永远”的了，任何依赖于主机、特定云厂商等host的站点在未来都不能保证永远在线。现在看ipfs作为host有可能达到本尊不在而网站依然存活。 以后有机会做一个完善点的静态站，希望脱离中心服务，达到网站永远在线吧。 目前的测试小站 已经 <a href="https://quiet-frog-5481.tmnl.co/" target="_blank" rel="noopener">rocket launched</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/12/the-way-of-go-eratosthenes-prime/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Winnux">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Winnux's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/12/the-way-of-go-eratosthenes-prime/" class="post-title-link" itemprop="url">The way of Go - Eratosthenes Prime</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-03-12 13:47:15" itemprop="dateCreated datePublished" datetime="2020-03-12T13:47:15+00:00">2020-03-12</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-16 07:42:04" itemprop="dateModified" datetime="2020-04-16T07:42:04+00:00">2020-04-16</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Bob/" itemprop="url" rel="index"><span itemprop="name">Bob</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Bob/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>代码来自Rob Pike的分享</p>
-<p><em>/*</em></p>
-<p><em>埃拉托斯特尼素数筛算法。</em></p>
-<p><em>算法描述：先用最小的素数2去筛，把2的倍数剔除掉；下一个未筛除的数就是素数(这里是3)。</em></p>
-<p><em>再用这个素数3去筛，筛除掉3的倍数… 这样不断重复下去，直到筛完为止</em></p>
-<p><em>*/</em></p>
-<p><em>func generate(ch chan&lt;- int) {</em></p>
-<p>_    for i := 2; i &lt; 100; i++ {_</p>
-<p>_        ch &lt;- i // Send ‘i’ to channel ‘ch’._</p>
-<p>_    }_</p>
-<p>_    close(ch)_</p>
-<p><em>}</em></p>
-<p><em>func filter(src &lt;-chan int, dst chan&lt;- int) {</em></p>
-<p>_    prime, ok := &lt;-src_</p>
-<p>_    if !ok {_</p>
-<p>_        close(dst)_</p>
-<p>_        return_</p>
-<p>_    }_</p>
-<p>_    fmt.Println(prime)_</p>
-<p>_    out := make(chan int)_</p>
-<p>_    go filter(out, dst)_</p>
-<p>_    for num := range src {_</p>
-<p>_        if num%prime != 0 {_</p>
-<p>_            out &lt;- num_</p>
-<p>_        }_</p>
-<p>_    }_</p>
-<p>_    close(out)_</p>
-<p><em>}</em></p>
-<p><em>//筛选素数</em></p>
-<p><em>func Sieve() {</em></p>
-<p>_    origin, wait := make(chan int), make(chan int) // Create a new channel._</p>
-<p>_    go generate(origin)_</p>
-<p>_    go filter(origin, wait)_</p>
-<p>_    &lt;-wait_</p>
-<p><em>}</em></p>
-<p>完全的golang的并行方式，看看c/c++的对比实现可以看到什么是go的思考方式，从面向过程、面向对象到面向并行，这个里面思维的转变是关键，现在还是受过去的影响，golang妥妥的当成c来写….偶尔go 一下享受下飞翔的感觉….，大多还是func-&gt;func，obj-&gt;obj，看啦Rob Pike的素数写法，感觉这个真的很Go啊。</p>
 
       
     </div>
@@ -954,7 +919,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">179</span>
+          <span class="site-state-item-count">180</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

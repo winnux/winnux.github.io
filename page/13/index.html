@@ -159,6 +159,84 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/31/influxdb-e4-bd-93-e9-aa-8c-e6-9c-8d-e5-8a-a1-e5-99-a8-e7-9b-91-e6-8e-a7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Winnux">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Winnux's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/03/31/influxdb-e4-bd-93-e9-aa-8c-e6-9c-8d-e5-8a-a1-e5-99-a8-e7-9b-91-e6-8e-a7/" class="post-title-link" itemprop="url">influxdb体验-服务器监控</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-03-31 12:54:42" itemprop="dateCreated datePublished" datetime="2017-03-31T12:54:42+00:00">2017-03-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-04-18 07:57:08" itemprop="dateModified" datetime="2020-04-18T07:57:08+00:00">2020-04-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Bob/" itemprop="url" rel="index"><span itemprop="name">Bob</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Bob/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>昨天看了下influxdb的资料，觉得这个时序数据库有点意思，今天上午本想能很快测试一下，结果整整弄了一上午才跑起来服务器监控，其中不少坑，网上的例子都是过时的东西，好多还得查手册。 事情原由还要从我的samba server服务不稳说起，最近总有人说访问慢，无法访问等，我没在意，重启过服务，后来发现还有人说不行，有点怀疑是否是samba那个服务器用的hub有问题，一直没结论。正好influxdb 配合collectd监控可以一用，结合grafana挺好。 看上去很美的组合，按照前人写的文章，本以为很容易，没想到坑很多。 首先我这个samba server是个centos6.5的“老”服务器， collectd这个包就没有，后来用个其他rpm源安装上了，而且新版本collectd的配置文件基本上core部分都没打开注释，而且plugin的路径在64位系统在/usr/lib64/collectd 目录下，这些搞定了，设置plugin network 只保留server ip port一行，其余注释掉就行，它和influxdb之间用udp，而不是有人说的tcp通信。这个坑半天。 influxdb比较简单，go写的，安装配置没啥说的，但collectd 插件配置时候注意其缺省的type文件路径有误，要改成 collectd实际的types.db文件路径。   最后 grafana这个早就不用外部server了，下载其rpm包自己安装完毕，配置data source ,dashboard，添加graph，比较坑的是添加graph的数据源方法是双击graph的标题，其余没任何提示，找半天才找到。 不过效果还可以，collectd打开的插件很少，没深入研究，但看它实际可用插件非常多，应该能很好。 <img src="http://imfiona.cn/wp/wp-content/uploads/2017/03/%E6%97%A0%E6%A0%87%E9%A2%98-1024x695.png" alt=""> 贴一些主要更改的配置文件 collectd.conf Hostname “localhost” FQDNLookup true BaseDir “/usr/var/lib/collectd” PIDFile “/usr/var/run/collectd.pid” PluginDir “/usr/lib64/collectd” TypesDB “/usr/share/collectd/types.db” Interval 10 Timeout 2 ReadThreads 5 … LoadPlugin network … <plugin network> server “127.0.0.1” “ 25286” <plugin> influxdb.conf [[collectd]] enable = true bind-address=”:25826” database=”collectd” typesdb=”/usr/share/collectd/types.db” …   grafana可以下载基本没有用配置，缺省监听3000，用户密码都是admin。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/30/e6-84-bf-e4-bd-a0-e8-b5-b0-e5-87-ba-e5-8d-8a-e7-94-9f-ef-bc-8c-e5-bd-92-e6-9d-a5-e4-bb-8d-e6-98-af-e5-b0-91-e5-b9-b4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -190,7 +268,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-16 07:42:04" itemprop="dateModified" datetime="2020-04-16T07:42:04+00:00">2020-04-16</time>
+                <time title="Modified: 2020-04-18 07:57:08" itemprop="dateModified" datetime="2020-04-18T07:57:08+00:00">2020-04-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -268,7 +346,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-16 07:42:04" itemprop="dateModified" datetime="2020-04-16T07:42:04+00:00">2020-04-16</time>
+                <time title="Modified: 2020-04-18 07:57:08" itemprop="dateModified" datetime="2020-04-18T07:57:08+00:00">2020-04-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -342,7 +420,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-16 07:42:04" itemprop="dateModified" datetime="2020-04-16T07:42:04+00:00">2020-04-16</time>
+                <time title="Modified: 2020-04-18 07:57:08" itemprop="dateModified" datetime="2020-04-18T07:57:08+00:00">2020-04-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -420,7 +498,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-16 07:42:04" itemprop="dateModified" datetime="2020-04-16T07:42:04+00:00">2020-04-16</time>
+                <time title="Modified: 2020-04-18 07:57:08" itemprop="dateModified" datetime="2020-04-18T07:57:08+00:00">2020-04-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -498,7 +576,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-16 07:42:04" itemprop="dateModified" datetime="2020-04-16T07:42:04+00:00">2020-04-16</time>
+                <time title="Modified: 2020-04-18 07:57:08" itemprop="dateModified" datetime="2020-04-18T07:57:08+00:00">2020-04-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -576,7 +654,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-16 07:42:04" itemprop="dateModified" datetime="2020-04-16T07:42:04+00:00">2020-04-16</time>
+                <time title="Modified: 2020-04-18 07:57:08" itemprop="dateModified" datetime="2020-04-18T07:57:08+00:00">2020-04-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -654,7 +732,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-16 07:42:04" itemprop="dateModified" datetime="2020-04-16T07:42:04+00:00">2020-04-16</time>
+                <time title="Modified: 2020-04-18 07:57:08" itemprop="dateModified" datetime="2020-04-18T07:57:08+00:00">2020-04-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -728,7 +806,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-16 07:42:04" itemprop="dateModified" datetime="2020-04-16T07:42:04+00:00">2020-04-16</time>
+                <time title="Modified: 2020-04-18 07:57:08" itemprop="dateModified" datetime="2020-04-18T07:57:08+00:00">2020-04-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -842,7 +920,7 @@ protected void deliverResponse(T response) {
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-16 07:42:04" itemprop="dateModified" datetime="2020-04-16T07:42:04+00:00">2020-04-16</time>
+                <time title="Modified: 2020-04-18 07:57:08" itemprop="dateModified" datetime="2020-04-18T07:57:08+00:00">2020-04-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -866,84 +944,6 @@ protected void deliverResponse(T response) {
 
       
           <p>刚刚京东买了一套《王阳明大传》，日本人冈田武彦的。 这是我看到写王阳明的书，唯一一本勾起购买欲望的。 也是目前看到写的最好的一本。 国内那么多快餐式的阳明学书，差的太多。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/02/e5-85-a8-e6-a0-88-e5-b7-a5-e7-a8-8b-e5-b8-88-e5-85-bb-e6-88-90-e8-ae-b0-e5-bd-957/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Winnux">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Winnux's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/03/02/e5-85-a8-e6-a0-88-e5-b7-a5-e7-a8-8b-e5-b8-88-e5-85-bb-e6-88-90-e8-ae-b0-e5-bd-957/" class="post-title-link" itemprop="url">全栈工程师养成记录7</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2017-03-02 13:58:07" itemprop="dateCreated datePublished" datetime="2017-03-02T13:58:07+00:00">2017-03-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-16 07:42:04" itemprop="dateModified" datetime="2020-04-16T07:42:04+00:00">2020-04-16</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Bob/" itemprop="url" rel="index"><span itemprop="name">Bob</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Bob/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>后端简单搭建完成 目测代码行数没有超过200行，这要是C/C++简直不可想象。 nodejs+express+mongodb，这就是站在巨人肩膀上的好处吧，这要集中注意力在自己的业务逻辑上。 目前的后端就是一个webAPI，基本上就是一些调用URL接口。 但这个目前用就足够了。 mongoose的一个功能，population，看了半天它的文档，搞清楚了，用在用户登录返回信息上了。 有点像sql的联合查询，把多个表结果联合一起返回。population这个更方便了，直接就地展开，返回的json对象就完毕了。 { “_id”: “58b78d060d917903f84339d6”, “status”: 1, “phoneNumber”: “13258675256”, “userName”: “Bob”, “userId”: “0451000001”, “__v”: 7, “_greenHouses”: [ { “_id”: “58b78025c79abb1360b945cd”, “ghName”: “哈尔滨1#大棚”, “uid”: “150001000001”, “__v”: 0, “hum1”: 1.5, “hum2”: 20, “lumen”: 60, “tem1”: 20.6, “tem2”: 23.7 }, { “_id”: “58b78027c79abb1360b945ce”, “ghName”: “哈尔滨2#大棚”, “uid”: “150001000002”, “__v”: 0 } ] }   _grennHouses部分就是population的部分，真的很好用。 下一步就是前端了，准备两部分，一部分是具体的功能（主要就是登录，查看信息），另一部分是管理+测试数据发送 搞两个app，头一个要ui漂亮点，后一个就无所谓了</p>
 
       
     </div>
@@ -1029,7 +1029,7 @@ protected void deliverResponse(T response) {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">179</span>
+          <span class="site-state-item-count">180</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
