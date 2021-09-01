@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="vagrant 跑起来，总想实验点什么，原来在单机上minikube感觉了一下，这不vagrant方便搭建测试环境了，就来个完整版kubernetes实验吧。 还真把这个事情想简单了，最重要的和跑minikube那时候开始遇到的问题一样，还是这个墙的问题，当时可是一碰到这个问题没经验，搞了半天才明白我等要用这个还是要有些中国特色的。 这次看了好多kubeadm的安装，由于版本迭代很快，实际最靠谱的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="kubernetes-kubeadm">
+<meta property="og:url" content="http://yoursite.com/2018/09/18/kubernetes-kubeadm/index.html">
+<meta property="og:site_name" content="Winnux&#39;s blog">
+<meta property="og:description" content="vagrant 跑起来，总想实验点什么，原来在单机上minikube感觉了一下，这不vagrant方便搭建测试环境了，就来个完整版kubernetes实验吧。 还真把这个事情想简单了，最重要的和跑minikube那时候开始遇到的问题一样，还是这个墙的问题，当时可是一碰到这个问题没经验，搞了半天才明白我等要用这个还是要有些中国特色的。 这次看了好多kubeadm的安装，由于版本迭代很快，实际最靠谱的">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2018-09-18T04:52:28.000Z">
+<meta property="article:modified_time" content="2020-03-27T06:19:46.723Z">
+<meta property="article:author" content="Winnux">
+<meta property="article:tag" content="kubernetes">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2018/09/18/kubernetes-kubeadm/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>kubernetes-kubeadm | Winnux's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Winnux's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/18/kubernetes-kubeadm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Winnux">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Winnux's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          kubernetes-kubeadm
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-09-18 12:52:28" itemprop="dateCreated datePublished" datetime="2018-09-18T12:52:28+08:00">2018-09-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-03-27 14:19:46" itemprop="dateModified" datetime="2020-03-27T14:19:46+08:00">2020-03-27</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Bob/" itemprop="url" rel="index"><span itemprop="name">Bob</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Bob/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>vagrant 跑起来，总想实验点什么，原来在单机上minikube感觉了一下，这不vagrant方便搭建测试环境了，就来个完整版kubernetes实验吧。 还真把这个事情想简单了，最重要的和跑minikube那时候开始遇到的问题一样，还是这个墙的问题，当时可是一碰到这个问题没经验，搞了半天才明白我等要用这个还是要有些中国特色的。 这次看了好多kubeadm的安装，由于版本迭代很快，实际最靠谱的还是官网的说明，按照官网说明，整理了一个sh脚本，在vm启动后执行，其中k8s的有关镜像我是前期pull下来的，当时是挂着vpn弄得，后来看有人从github上pull下来，然后重新tag成k8s的image name，在rm原来的，这样也行。我为了方便（测试vm没少destroy）就用go的http file在宿主机上搭了个文件服务，然后vm里去wget一下。 脚本如下：</p>
+<blockquote>
+<p>#!/usr/bin/env bash setenforce 0 sed -i “s/^SELINUX=enforcing/SELINUX=disabled/g” /etc/sysconfig/selinux systemctl stop firewalld systemctl disable firewalld swapoff -a sed -i ‘s/.*swap.*/#&amp;/‘ /etc/fstab cat &lt;<EOF > /etc/sysctl.d/k8s.conf net.bridge.bridge-nf-call-ip6tables = 1 net.bridge.bridge-nf-call-iptables = 1 EOF sysctl –system cat &lt;<EOF > /etc/yum.repos.d/kubernetes.repo [kubernetes] name=Kubernetes baseurl=<a href="https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86\_64/" target="_blank" rel="noopener">https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86\_64/</a> enabled=1 gpgcheck=1 repo_gpgcheck=1 gpgkey=<a href="https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg" target="_blank" rel="noopener">https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg</a> <a href="https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg" target="_blank" rel="noopener">https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg</a> EOF yum install -y net-tools nano wget sudo yum install -y yum-utils \ device-mapper-persistent-data \ lvm2 sudo yum-config-manager –add-repo <a href="https://download.docker.com/linux/centos/docker-ce.repo" target="_blank" rel="noopener">https://download.docker.com/linux/centos/docker-ce.repo</a> yum install -y –setopt=obsoletes=0 \ docker-ce-17.03.1.ce-1.el7.centos \ docker-ce-selinux-17.03.1.ce-1.el7.centos systemctl enable docker &amp;&amp; systemctl restart docker sudo mkdir -p /etc/docker sudo tee /etc/docker/daemon.json &lt;&lt;-‘EOF’ { “registry-mirrors”: [“https://*****.mirror.aliyuncs.com”] } EOF sudo systemctl daemon-reload sudo systemctl restart docker yum install -y kubelet kubeadm kubectl –disableexcludes=kubernetes systemctl enable kubelet &amp;&amp; systemctl start kubelet wget -q <a href="http://172.16.64.210:8801/coredns-1.1.3.tar" target="_blank" rel="noopener">http://172.16.64.210:8801/coredns-1.1.3.tar</a> wget -q <a href="http://172.16.64.210:8801/kube-scheduler-amd64-1.11.3.tar" target="_blank" rel="noopener">http://172.16.64.210:8801/kube-scheduler-amd64-1.11.3.tar</a> wget -q <a href="http://172.16.64.210:8801/etcd-amd64.3.2.18.tar" target="_blank" rel="noopener">http://172.16.64.210:8801/etcd-amd64.3.2.18.tar</a> wget -q <a href="http://172.16.64.210:8801/kube-apiserver-amd64-1.11.3.tar" target="_blank" rel="noopener">http://172.16.64.210:8801/kube-apiserver-amd64-1.11.3.tar</a> wget -q <a href="http://172.16.64.210:8801/pause-3.1.tar" target="_blank" rel="noopener">http://172.16.64.210:8801/pause-3.1.tar</a> wget -q <a href="http://172.16.64.210:8801/kube-controller-manager-amd64-1.11.3.tar" target="_blank" rel="noopener">http://172.16.64.210:8801/kube-controller-manager-amd64-1.11.3.tar</a> wget -q <a href="http://172.16.64.210:8801/kube-proxy-amd64-1.11.3.tar" target="_blank" rel="noopener">http://172.16.64.210:8801/kube-proxy-amd64-1.11.3.tar</a> wget -q <a href="http://172.16.64.210:8801/kubernetes-dashboard-amd64.1.10.0.tar" target="_blank" rel="noopener">http://172.16.64.210:8801/kubernetes-dashboard-amd64.1.10.0.tar</a> wget -q <a href="http://172.16.64.210:8801/kubernetes-dashboard.yaml" target="_blank" rel="noopener">http://172.16.64.210:8801/kubernetes-dashboard.yaml</a> wget -q <a href="http://172.16.64.210:8801/kubernetes-dashboard-admin.rbac.yaml" target="_blank" rel="noopener">http://172.16.64.210:8801/kubernetes-dashboard-admin.rbac.yaml</a> docker load &lt; coredns-1.1.3.tar docker load &lt; kube-scheduler-amd64-1.11.3.tar docker load &lt; etcd-amd64.3.2.18.tar docker load &lt; kube-apiserver-amd64-1.11.3.tar docker load &lt; pause-3.1.tar docker load &lt; kube-controller-manager-amd64-1.11.3.tar docker load &lt; kube-proxy-amd64-1.11.3.tar docker load &lt; kubernetes-dashboard-amd64.1.10.0.tar</p>
+</blockquote>
+<p>其中docker的镜像从阿里云获取，其他k8s的直接从文件load回来   这样一来我得vagrant up后基本k8s的基本环境就搭建完毕了，然后就是kubeadm init一下，另一个节点join进来就可以了。网络模型简单起见就用了flannel，看介绍这个性能和calico要差很多，测试无所谓，就先跑起来了。 vagrantfile</p>
+<blockquote>
+<p># -<em>- mode: ruby -</em>- # vi: set ft=ruby : ENV[“LC_ALL”] = “en_US.UTF-8” app_nodes = { :master =&gt; ‘192.168.88.10’, :node =&gt; ‘192.168.88.20’ } Vagrant.configure(“2”) do |config| config.vm.box=”centos/7” app_nodes.each do |app_node_name,app_node_ip| config.vm.define app_node_name do |app_config| app_config.vm.hostname = “#{app_node_name.to_s}.vagrant.internal” app_config.vm.network :private_network, ip: app_node_ip app_config.vm.provision “shell”,path:”set.sh” app_config.vm.provider “virtualbox” do |vb| vb.name = app_node_name.to_s vb.customize [“modifyvm”, :id, “–memory”, “2048”] vb.customize [“modifyvm”, :id, “–cpus”, “2”] end end end end</p>
+</blockquote>
+<p>这两个一个是master，一个跑node节点   最后还有折腾够呛的是kubernetes-dashboard，官网对kubeadm安装明确说明要添加用户访问方式，没细看。本质上这个实际也是个容器deployment，看有人用nodeport模式暴漏的，然后这样测试了一下，注意官网的yaml缺省用户名就可以了。但是，这样在master上访问还是有权限问题（我理解可能还是apiserver的访问权限问题），只有在dashboard的pods所在node节点ip上访问可以。 目前看vagrant这套跑kubernetes测试环境还是很方便的。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/kubernetes/" rel="tag"># kubernetes</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/09/10/vagrant-up/" rel="prev" title="vagrant up">
+      <i class="fa fa-chevron-left"></i> vagrant up
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/09/19/vagrant-e8-b7-91kubeadm-e6-b5-8b-e8-af-95k8s-e7-9a-84-e9-97-ae-e9-a2-98/" rel="next" title="vagrant跑kubeadm测试k8s的问题">
+      vagrant跑kubeadm测试k8s的问题 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Winnux</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">181</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Winnux</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
